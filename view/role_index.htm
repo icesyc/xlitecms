@@ -1,0 +1,60 @@
+{head}
+<style>
+#ckall,#ckall2{
+	margin-left:7px;
+	_margin-left:3px;
+}
+.link-img{
+	height:40px;
+}
+</style>
+
+<div class="body">
+	<h1>用户组管理</h1>
+	<div class="border-tip">
+		<img src="images/tip.gif" align="absmiddle"/> 单击进行选择，双击编辑项目，按delete键可删除选中的项目。
+	</div>
+	<div id="toolbar-top">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall"/>
+		<label for="ckall">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('role')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+		<a href="admin.php?C=role&A=save" class="link-button" hidefocus="true"><img src="images/add_small.gif" align="absmiddle"/> 添加</a>
+	</div>
+	<table class="list" cellspacing="0">
+	<tr>
+		<th width="3%">&nbsp;</th>
+		<th width="15%">名称</th>
+		<th width="15%">操作</th>
+	</tr>
+	<!-- BEGIN roleList -->
+	<tr onclick="TRSelect.selectChild(this)" onmouseover="this.className='tr-over'" onmouseout="if(!this.selected)this.className=''" title="单击选择该条记录" ondblclick="javascript:loc('role','save','id={id}')">
+		<td><input type="checkbox" name="id[]" value="{role_id}"/>
+		<td>{role_name}</td>
+		<td>
+		<a href="admin.php?C=role&A=delete&id={role_id}" onclick="return confirm('确实要删除吗？')" title="删除"><img src="images/delete.gif" align="absmiddle" title="删除"/> 删除</a>
+		<a href="admin.php?C=role&A=save&id={role_id}" title="修改"><img src="images/edit.gif" align="absmiddle"/> 修改</a>
+		</td>
+	</tr>
+	<!-- END roleList -->
+	</table>
+	<div id="toolbar">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall2"/>
+		<label for="ckall2">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('role')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+		<a href="admin.php?C=role&A=save" class="link-button" hidefocus="true"><img src="images/add_small.gif" align="absmiddle"/> 添加</a>
+	</div>
+</div>
+<script type="text/javascript">
+function ondelete(e){
+	e = window.event || e;
+	t = e.srcElement || e.target;
+	if(t.tagName == "INPUT" && t.type == "text") return;
+	if(e.keyCode == 46)
+		Model.Delete('role');
+}
+Event.observe(document,'keyup', ondelete);
+</script>
+</body>
+</html>

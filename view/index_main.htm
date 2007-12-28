@@ -1,0 +1,81 @@
+{head}
+<style>
+#function-list {
+	margin-left:2em;
+}
+#function-list li{
+	background:url(images/orange_dot.gif) no-repeat left 3px;
+	margin:3px 0;
+	padding-left:1.4em;
+}
+#function-button a{
+	font-size:16px;
+	font-weight:bold;
+	margin:10px;
+	padding:10px;
+	border:1px solid #fff;
+}
+#function-button a:hover{
+	border:1px solid #ccc;
+	border-bottom:4px solid #6BBAEF;
+}
+#about{
+	padding:5px 0;
+	margin:8px 0;
+	border-bottom:1px solid #6BBAEF;
+	font-weight:bold;
+	color:#369;
+}
+</style>
+<div class="body">
+<p id="function-button">
+<a href="admin.php?C=article&A=save" onclick="parent.activeItem(5)"><img src="images/add.gif" align="absmiddle"/> 发布文章</a>
+<a href="admin.php?C=update&A=updateIndex"><img src="images/update.gif" align="absmiddle"/> 更新首页</a>
+<a href="admin.php?C=system&A=backup" onclick="parent.activeItem(0)"><img src="images/backup.gif" align="absmiddle"/> 数据备份</a>
+<a href="../" target="_top"><img src="images/back.gif" align="absmiddle"/> 返回网站</a>
+</p>
+<h1>关于Xlite</h1>
+<p>	　　Xlite是一款基于PHP+Mysql技术开发的CMS系统，它采用了plite框架进行开发，完全的MVC结构，最主要的它是完全免费并且开源的。使用它您可以轻松构建您的WEB站点。
+</p>
+<!--
+<p id="about">Xlite官方网站: <a href="http://xlite.plite.net">http://xlite.plite.net</a>
+</p>
+-->
+Xlite的主要有以下几部分功能：
+<ul id="function-list">
+	<li>
+		文章管理<br/>
+		功能强大的FCKEditor，在线编辑文章更简单，支持文章缩略图，文章标题颜色，文章标签功能。<br/>
+		文章批量生成静态页面，批量删除，批量更新功能。<br/>
+	</li>
+	<li>分类管理<br/>
+		无限的系统分类结点，采用新的分类存储算法，支持分类数据生成XML页面。<br/>
+		分类批量删除，批量更新列表页，批量更新分类文章内容页。
+	</li>
+	<li>图片管理<br/>		
+		批量上传图片，自动生成图片集缩略图。<br/>
+		图片集生成静态页面，分类批量更新列表页，批量更新图片幻灯页。
+	</li>
+	<li>采集器<br/>
+		采集规则断点调试功能。<br/>
+		HTM和RSS两种页面格式，UTF8，GBK编码的页面采集，支持使用Cookie<br/>
+		过滤重复链接，关键词过滤功能。自定义采集记录数。<br/>
+		文章图片，FLASH等资源本地化。</br>
+	</li>
+	<li>插件管理<br/>
+		留言板，友情链接，更多的插件还在开发中。
+	</li>
+	<li>远程发布<br/>
+		多FTP服务器的批量发布。<br/>
+		支持SESSION级断点续传(用户始终在登录状态，下次登录后不保存该状态)。
+	</li>
+	<li>系统设置<br/>
+		数据备份到本地或服务器，数据恢复功能。<br/>
+		多管理员模式。
+	</li>
+	<li>其它<br/>
+		AJAX技术的完美应用，用户界面更加美观人性化。<br/>
+		兼容IE,Firefox浏览器。
+	</li>
+</ul>	
+</div>

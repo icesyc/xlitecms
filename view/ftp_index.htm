@@ -1,0 +1,68 @@
+{head}
+<style>
+#ckall,#ckall2{
+	margin-left:7px;
+	_margin-left:3px;
+}
+</style>
+<div class="body">
+	<h1>远程发布管理</h1>
+	<div class="border-tip">
+		<img src="images/tip.gif" align="absmiddle"/> 单击进行选择，双击编辑项目，按delete键可删除选中的项目。
+	</div>
+	<div id="toolbar-top">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall"/>
+		<label for="ckall">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('ftp')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a><a href="javascript:loc('ftp','save')" class="link-button" hidefocus="true"><img src="images/add_small.gif" align="absmiddle"/> 新增</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Ftp.pub()" class="link-button" hidefocus="true" title="发布"><img src="images/update_small.gif" align="absmiddle"/> 发布</a>
+	</div>
+	<table class="list" cellspacing="0">
+	<tr>
+		<th>&nbsp;</th>
+		<th width="20%">网站名称</th>
+		<th width="20%">FTP地址</th>
+		<th width="20%">发布分类</th>
+		<th width="20%">上次发布日期</th>
+		<th width="20%">操 作</th>
+	</tr>
+	<!-- BEGIN ftpList -->
+	<tr onclick="TRSelect.toggle(this)" onmouseover="this.className='tr-over'" onmouseout="if(!this.selected)this.className=''" title="单击选择该条记录" ondblclick="loc('ftp','save','id={id}')">
+		<td><input type="checkbox" name="id[]" value="{id}"/></td>
+		<td>{site_name}</td>
+		<td>{host}</td>
+		<td>{sort}</td>
+		<td>{last_pub_date}</td>
+		<td>
+		<a href="admin.php?C=ftp&A=delete&id={id}" onclick="return confirm('确实要删除吗？')"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+		<a href="javascript:Ftp.test({id})" title="测试FTP是否能正常连接"><img src="images/test.gif" align="absmiddle"/> 测试</a>
+		<a href="javascript:Ftp.pub({id})" title="发布"><img src="images/update_small.gif" align="absmiddle"/> 发布</a>
+		</td>
+	</tr>
+	<!-- END artList -->
+	<tr class="{noRecord}">
+		<td colspan="6" id="no-record">还没有添加FTP账号.</td>
+	</tr>
+	</table>
+	<div id="toolbar">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall2"/>
+		<label for="ckall2">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('ftp')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a><a href="javascript:loc('ftp','save')" class="link-button" hidefocus="true"><img src="images/add_small.gif" align="absmiddle"/> 新增</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Ftp.pub()" class="link-button" hidefocus="true" title="发布"><img src="images/update_small.gif" align="absmiddle"/> 发布</a>
+	</div>
+</div>
+<script type="text/javascript">
+function ondelete(e){
+	e = window.event || e;
+	t = e.srcElement || e.target;
+	if(t.tagName == "INPUT" && t.type == "text") return;
+	if(e.keyCode == 46)
+		Model.Delete('ftp');
+}
+Event.observe(document,'keyup', ondelete);
+</script>
+</body>
+</html>

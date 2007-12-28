@@ -1,0 +1,178 @@
+{head}
+<style>
+form span{
+	width:15%;
+}
+form .comment{
+	margin:6px 17.4%;
+	_margin:6px 13.3%;
+}
+fieldset{
+	border:1px solid #6BBAEF;
+	padding:10px 0;
+}
+legend{	
+	color:#000;
+	font-size:12px;
+	font-weight:bold;
+}
+.tip{
+	margin-left:10px;
+	color:#f60;
+	visibility:hidden;
+}
+</style>
+<form class="body" action="admin.php" method="post" name="addImage" onsubmit="return ckForm(this)" enctype="multipart/form-data">
+	<h1>添加图片集</h1>
+	<div class="border-tip">
+		<img src="images/tip.gif" align="absmiddle"/> 单个图片大小不能超过<strong class="orange">{maxFileSize}</strong>，所有图片大小总和不能超过<strong class="orange">{maxFormSize}</strong>。
+	</div>
+	<div>
+		<span>此组图片的标题</span> 
+		<input type="text" class="highlight" name="title" size="40" rule="required" tip="图片集的标题必须指定"/>		
+	</div>
+	<div>
+		<span>保存到分类</span> 
+		<select name="sort_id" class="highlight" rule="required" tip="请选择图片分类">
+		<option value="">请选择图片分类</option>
+		<!-- BEGIN sortList -->
+		<option value="{id}">{title}</option>
+		<!-- END sortList -->
+		</select>
+	</div>
+	<div>
+		<span>此组图片的缩略图</span> 
+		使用
+		<select name="thumbIndex">
+			<option value="0">第1张图片</option>
+			<option value="1">第2张图片</option>
+			<option value="2">第3张图片</option>
+			<option value="3">第4张图片</option>
+			<option value="4">第5张图片</option>
+		</select>
+		做为此组图片的缩略图
+		<label class="tip" id="invalidIndex">选择的图片没有被上传</label>
+	</div>
+	<fieldset>
+		<legend>上传图片</legend>
+		<div>
+			<span>标题</span> 
+			<input type="text" name="img_title[]" size="30"/>
+			<input type="file" name="image[]"/>
+			<a href="javascript:void(0)" onclick="addLine(this)"><img src="images/add_small.gif" align="absmiddle" title="增加一行"/></a>
+			<a href="javascript:void(0)" onclick="removeLine(this)"><img src="images/remove.gif" align="absmiddle" title="删除此行"/></a>
+		</div>
+		<div>
+			<span>标题</span> 
+			<input type="text" name="img_title[]" size="30"/>
+			<input type="file" name="image[]"/>
+			<a href="javascript:void(0)" onclick="addLine(this)"><img src="images/add_small.gif" align="absmiddle" title="增加一行"/></a>
+			<a href="javascript:void(0)" onclick="removeLine(this)"><img src="images/remove.gif" align="absmiddle" title="删除此行"/></a>
+		</div>
+		<div>
+			<span>标题</span> 
+			<input type="text" name="img_title[]" size="30"/>
+			<input type="file" name="image[]"/>
+			<a href="javascript:void(0)" onclick="addLine(this)"><img src="images/add_small.gif" align="absmiddle" title="增加一行"/></a>
+			<a href="javascript:void(0)" onclick="removeLine(this)"><img src="images/remove.gif" align="absmiddle" title="删除此行"/></a>
+		</div>
+		<div>
+			<span>标题</span> 
+			<input type="text" name="img_title[]" size="30"/>
+			<input type="file" name="image[]"/>
+			<a href="javascript:void(0)" onclick="addLine(this)"><img src="images/add_small.gif" align="absmiddle" title="增加一行"/></a>
+			<a href="javascript:void(0)" onclick="removeLine(this)"><img src="images/remove.gif" align="absmiddle" title="删除此行"/></a>
+		</div>
+		<div>
+			<span>标题</span> 
+			<input type="text" name="img_title[]" size="30"/>
+			<input type="file" name="image[]"/>
+			<a href="javascript:void(0)" onclick="addLine(this)"><img src="images/add_small.gif" align="absmiddle" title="增加一行"/></a>
+			<a href="javascript:void(0)" onclick="removeLine(this)"><img src="images/remove.gif" align="absmiddle" title="删除此行"/></a>
+		</div>
+	</fieldset>
+	<div class="center" style="margin-top:8px">
+		<input type="submit" value="添 加" class="button"/>　　
+		<input type="button" value="返 回" class="button" onclick="history.back()"/>
+		<input type="hidden" name="C" value="gallery"/>
+		<input type="hidden" name="A" value="save"/>
+		<input type="hidden" name="id" value="{id}"/>
+	</div>
+</form>
+<script type="text/javascript">
+document.addImage.sort_id.value = '{sort_id}';
+
+//增加一行
+function addLine(o){
+	node = o.parentNode.cloneNode(true);
+	o.parentNode.parentNode.appendChild(node);
+	autoFixIframe(false);
+	var ti = document.addImage.thumbIndex;
+	var newI = ti.options.length+1;
+	ti.options.add(new Option('第'+newI+'张图片', newI-1));
+}
+//删除一行
+function removeLine(o){	
+	var ti = document.addImage.thumbIndex;
+	if(ti.options.length == 1) return false;
+	line = o.parentNode;
+	line.parentNode.removeChild(line);
+	autoFixIframe(false);
+	var ti = document.addImage.thumbIndex;
+	ti.remove(ti.options.length-1);
+}
+
+//检查表单
+function ckForm(f)
+{
+	if(!Validator.validate(f)) return false;
+	try{
+	//检查文件类型
+	var valid = true;
+	for(var i=0;i<f.elements["image[]"].length;i++)
+	{
+		var file = f.elements["image[]"][i].value;
+		//是不是图片
+		if(file != "" && !/\.(gif|jpg|png|bmp|)$/i.test(file))
+		{
+			valid = false;
+			if(!f.elements["image[]"][i].label)
+			{
+				var label = document.createElement("label");
+				label.style.marginLeft = "10px";
+				label.style.color      = "#F60";
+				label.innerHTML = "不是合法的图片类型";
+				f.elements["image[]"][i].parentNode.appendChild(label);
+				f.elements["image[]"][i].label = label;
+			}
+		}
+		else
+		{
+			if(f.elements["image[]"][i].label)
+			{
+				f.elements["image[]"][i].parentNode.removeChild(f.elements["image[]"][i].label);
+				f.elements["image[]"][i].label = null;
+			}
+		}
+	}
+	if(!valid) return false;
+	
+	img = f.elements["image[]"][f.thumbIndex.value] || f.elements["image[]"];
+	if(img.value == "")
+	{
+		Utility.visible('invalidIndex');
+		return false;
+	}
+	else
+	{
+		Utility.hidden('invalidIndex');
+		f.submit();
+		Utility.disableButton();
+		Model.message("正在上传图片,请稍候...", "LOADING", false);
+		return false;
+	}
+	}catch(e){alert(e.message());return false}
+}
+</script>
+</body>
+</html>

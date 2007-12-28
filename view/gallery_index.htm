@@ -1,0 +1,108 @@
+{head}
+<style>
+#ckall,#ckall2{
+	margin-left:7px;
+	_margin-left:3px;
+}
+#galleryList{
+	clear:both;
+	width:100%;
+	border-top:1px solid #d9d9d9;
+	background:#f7f7f7;
+}
+.gallery{
+	float:left;
+	width:145px;
+	height:145px;
+	padding:8px;
+	text-align:center;
+	border:1px solid #f7f7f7;
+	margin:4px 6px;
+}
+.gallery img{
+	border:1px solid #D5DADE;
+	padding:6px;
+	background:#fff;
+}
+.gallery p{
+	text-align:center;
+	margin: 4px;
+	overflow:hidden;
+	white-space:nowrap;
+	width:100%;
+}
+.gallery p a{
+	color:#69c;
+}
+.select{
+	background:#ECF5FF;
+	border:1px solid #6BBAEF;
+}
+p#selectSort{
+	margin:8px 0;
+	text-align:right;
+}
+</style>
+<div class="body">
+	<h1>图片集管理</h1>
+	<p id="selectSort">
+	分类查看图片集：
+	<select name="sort_id" id="sort_id" onchange="loc('gallery','index','sort_id='+this.value)">
+	<option value="">请选择系统分类</option>
+	<!-- BEGIN sortList -->
+	<option value="{id}">{title}</option>
+	<!-- END sortList -->
+	</select>
+	</p>
+	<div class="border-tip">
+		<img src="images/tip.gif" align="absmiddle"/> 单击进行选择，按delete键可删除选中的项目。双击标题可修改标题，双击图片查看图片集的信息。
+	</div>
+	<div id="toolbar-top">
+		<input type="checkbox" onclick="Gallery.selectAll(this.checked)" id="ckall"/>
+		<label for="ckall">全选</label> 
+		选中项：
+		<a href="javascript:Gallery.Delete()" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Gallery.UpdateGallery()" class="link-button" hidefocus="true" title="生成(更新)页面"><img src="images/update_page.gif" align="absmiddle"/> 更新</a>
+		<a href="javascript:void(0)" onclick="Gallery.UpdateList($('sort_id').value)" class="link-button" hidefocus="true" title="生成(更新)当前分类列表页面"><img src="images/update_small.gif" align="absmiddle"/> 更新</a>
+	</div>
+	<div id="galleryList">
+		<!-- BEGIN galleryList -->
+		<div title="{title}({pic_number})" class="gallery" onclick="Gallery.toggle(this)">
+			<p>
+			<img src="{thumbnail}" ondblclick="loc('image', 'index','gallery_id={id}')"/></p>
+			<p class="center">[<a href="admin.php?C=gallery&sort_id={sort_id}" title="点击显示该分类下的图片集">{sort}</a>]
+			<span ondblclick="Gallery.EditTitle(this)" onclick="stopEvent(event)">{title}</span>
+			<span class="orange">({pic_number})</span></p>
+			<input type="checkbox" name="id[]" value="{id}" class="none"/>
+		</div>
+		<!-- END galleryList -->
+		<div class="clear"></div>
+	</div>
+	<div class="{noRecord}" style="border:1px solid #ABBA9D" id="no-record">
+		没有任何记录.
+	</div>
+	<div id="pager">{pager}</div>
+	<div id="toolbar">
+		<input type="checkbox" onclick="Gallery.selectAll(this.checked)" id="ckall2"/>
+		<label for="ckall2">全选</label> 
+		选中项：
+		<a href="javascript:Gallery.Delete()" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Gallery.UpdateGallery()" class="link-button" hidefocus="true" title="生成(更新)页面"><img src="images/update_page.gif" align="absmiddle"/> 更新</a>
+		<a href="javascript:void(0)" onclick="Gallery.UpdateList($('sort_id').value)" class="link-button" hidefocus="true" title="生成(更新)当前分类列表页面"><img src="images/update_small.gif" align="absmiddle"/> 更新</a>
+	</div>
+</div>
+<script type="text/javascript">
+function ondelete(e){
+	e = window.event || e;
+	t = e.srcElement || e.target;
+	if(t.tagName == "INPUT" && t.type == "text") return;
+	if(e.keyCode == 46)
+		Gallery.Delete();
+}
+$('sort_id').value = '{sort_id}';
+Event.observe(document,'keyup', ondelete);
+</script>
+</body>
+</html>

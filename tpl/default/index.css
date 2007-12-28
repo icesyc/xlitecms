@@ -1,0 +1,118 @@
+
+/*====================================================
+//		FileName:index.css
+//		Summary: 系统全局样式表文件
+//		Author: ice_berg16(寻梦的稻草人)
+//		LastModifed:2006-10-11
+//		copyright (c)2004-2006 ice_berg16@163.com
+//===================================================*/
+
+/* 左侧 */
+.left-block, .right-block{
+	width:240px;
+}
+.left-block{
+	float:left;
+}
+.center-block{
+	margin-left:245px;
+	margin-right:245px;
+}
+/* 右侧 */
+.right-block{
+	float:right;
+}
+
+/* 二栏的左则 */
+#top-left{
+	width:644px;
+	overflow:hidden;
+}
+/* 二栏的右则 */
+#top-right{
+	border:1px solid #87C5F4;
+	float:right;
+	width:118px;
+	text-align:center;
+}
+.inner-left{
+	float:left;
+	width:240px;
+}
+.inner-main{
+	width:400px;
+	float:right;
+}
+.sortnav{
+	border:1px solid #FE7800;
+	background:#FEFCF0;
+	padding:10px;
+}
+.sortnav li{
+	border-bottom:1px dashed #ccc;
+	padding:4px 0;
+	line-height:20px;
+}
+.sortHead{
+	float:left;
+	width:38px;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	margin-right:6px;
+	color:#fff;
+	font-weight:bold;
+	background:url(images/sort_button_bg.gif) no-repeat;
+}
+.news-list{
+	margin:8px 10px;
+}
+.news-list li{
+	border-bottom:1px dashed #ccc;
+	background:url(images/dot_1.gif) no-repeat left center;
+	padding:3px 3px 3px 20px;
+	margin-bottom:1px;
+	_margin-bottom:0; /* IE6 hack */
+}
+img.news-thumb{
+	width:100px;
+	height:100px;
+	border:1px solid #000;
+	padding:3px;
+}
+#pic-news li{
+	margin:6px 0;
+	line-height:150%;
+}
+#tags{
+	background:#FFFFEA url(images/tags.gif) no-repeat 1px top;
+	border:1px solid #97B280;
+	line-height:25px;
+	padding:30px 10px 10px;
+	margin-top:9px;
+}
+#gallery-block{
+	margin-top:8px;
+	clear:both;
+	_margin-top:0;
+}
+#gallery li{
+	float:left;
+	margin:10px 10px 0;
+	text-align:center;
+	border:1px solid #ccc;
+	padding:6px;
+}
+#gallery li p{
+	margin:4px 0;
+}
+
+ul.list li{
+	background:url(images/dot_1.gif) no-repeat left center;
+	padding-left:20px;
+}
+.postTime{
+	font-size:10px;
+	float:right;
+	color:#666;
+}

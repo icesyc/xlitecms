@@ -1,0 +1,136 @@
+{head}
+<style>
+div#editor{
+	margin:0 -20px;
+	padding:0;
+}
+.TBButton
+{
+    padding:3px;
+	border: #fff 1px solid;
+}
+
+.buttonOver
+{
+	padding:3px;
+    border: #316ac5 1px solid;
+    background-color: #dff1ff;
+}
+#thumbPreview{
+	border:1px solid #000;
+}
+#thumbPreview{
+	width:100px;
+	height:100px;
+}
+#thumbArea{
+	margin-top:10px;
+}
+</style>
+<form class="body" action="admin.php" method="post" validate="true" name="saveForm">
+	<h1>文章{act}</h1>
+	<div> 
+		<span>文章分类</span> 
+		<select name="sort_id" class="fixed-width highlight" rule="required" tip="请选择文章的分类" scroll="yes">
+		<option value="">请选择文章分类</option>
+		<!-- BEGIN sort -->
+		<option value="{id}">{title}</option>
+		<!-- END sort -->
+		</select>
+	</div>
+	<div class="with-line">
+		<span>标 签</span> 
+		<input type="text" class="textbox" name="tags" size="40" value="{tags}" maxlength="50"/>
+		<p class="comment">什么是标签？<br/>
+		 标签是一篇文章包含的一组关键字，可以用来将相关内容的文章进行聚合，也可以进行标签搜索。<br/>
+		 <strong>关键词之间请用","(英文逗号)隔开。</strong>
+		</p>
+	</div>
+	<div>
+		<span>文章缩略图</span> 
+		<input type="checkbox" value="1" name="is_pic" id="is_pic" onclick="showThumbArea(this.checked)"/>
+		<label for="is_pic">启用缩略图</label>
+		<label id="thumbButton" class="none">
+		<input type="text" name="thumbnail" class="textbox" size="50" readonly="readonly" value="{thumbnail}"/>
+		<input type="button" class="small-button" value="选择图片" onclick="selectImage()"/>
+		</label>
+	</div>
+	<div class="with-line none" id="thumbArea">
+		<span>缩略图预览</span>		
+		<img src="UserFiles/Image/no_image.gif" id="thumbPreview"/>
+	</div>
+	<div>
+		<span>文章标题</span> 
+		<input type="text" class="highlight" name="title" size="50" value="{title}" maxlength="50" rule="required" tip="文章标题必须填写，25个字以内" scroll="yes"/>
+		<img src="images/text_color.gif" onclick="selectColor(this)" class="TBButton" onmouseover="this.className='buttonOver'" onmouseout="this.className='TBButton'" align="absmiddle" title="选择标题颜色"/>
+		<input type="hidden" name="title_color" id="title_color" value="{title_color}"/>
+	</div> 
+	<div> 
+		<span>发布日期</span> 
+		<input type="text" class="textbox" name="post_time" size="30" value="{post_time}" readonly="readonly" onclick="SelectDate(this)"/>
+	</div>
+	<div class="with-line"> 
+		<span>文章摘要</span> 
+		<textarea class="textbox" name="summary" cols="70" rows="5">{summary}</textarea>
+	</div>
+	<div> 
+		<span>文章作者</span> 
+		<input type="text" class="textbox" name="author" size="40" value="{author}" maxlength="20"/>
+	</div> 
+	<div> 
+		<span>文章来源</span> 
+		<input type="text" class="textbox" name="come_from" size="40" value="{come_from}" maxlength="25"/>
+	</div>
+	<div class="with-line"> 
+		<span>文章属性</span> 
+		<input type="checkbox" name="is_recmd" id="is_recmd" value="1"/>
+		<label for="is_recmd">推荐</label>
+	</div>
+	<div id="editor">
+		{editor}
+	</div>
+	<div class="center">
+		<input type="submit" value="保 存" class="button"/>　
+		<input type="button" value="返 回" class="button" onclick="history.back()"/>
+		<input type="hidden" name="C" value="article"/>
+		<input type="hidden" name="A" value="save"/>
+		<input type="hidden" name="id" value="{id}"/>
+	</div>
+</form>
+<script type="text/javascript">
+editInitialize();
+
+//编辑初始化
+function editInitialize()
+{
+
+	document.saveForm.sort_id.value = '{sort_id}';
+	document.saveForm.elements['title'].style.color = '{title_color}';
+	document.saveForm.is_recmd.checked = {is_recmd};
+	//有缩图
+	if(document.saveForm.thumbnail.value.length > 0)
+	{
+		showThumbArea(true);
+		document.saveForm.is_pic.checked = true;
+		$('thumbPreview').src = document.saveForm.thumbnail.value;
+	}
+}
+
+//选择图片的回调函数
+function SetUrl(url)
+{
+	document.saveForm.thumbnail.value = url;
+	$('thumbPreview').src = url;
+	autoFixIframe(false);
+}
+
+function showThumbArea(check){
+	Utility.toggle('thumbArea');
+	if(check)
+		Utility.showInline("thumbButton");
+	else
+		Utility.hide("thumbButton");
+}
+</script>
+</body>
+</html>

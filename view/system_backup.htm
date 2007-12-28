@@ -1,0 +1,148 @@
+{head}
+<style>
+.wide{
+	margin-top:20px;
+}
+h3#s-msg{
+	display:inline;
+	color:#F60;
+	visibility:hidden;
+	font:12px normal;
+}
+</style>
+<div class="body">
+	<h1>数据库备份</h1>
+	<form method="post" action="admin.php" name="dumpForm" onsubmit="submitForm(this);return false">
+		<div class="border-tip">
+			<img src="images/tip.gif" align="absmiddle"/> 选择普通备份只备份数据库的表结构，完全备份包括表结构和数据。
+		</div>
+		<div>
+			<span>备份选项</span>
+			<input type="radio" name="dumpType"	value="structure" id="dump1"/>
+			<label for="dump1">普通</label>
+			<input type="radio" name="dumpType"	value="full" checked="true" id="dump2"/>
+			<label for="dump2">完全</label>
+		</div>
+		<div>
+			<span>保存位置</span>
+			<input type="radio" name="saveType"	value="server" id="save1"/>
+			<label for="save1">服务器</label>
+			<input type="radio" name="saveType"	value="client" checked="true" id="save2"/>
+			<label for="save2">下载到本地</label>
+		</div>
+		<div class="wide">
+			<span></span>
+			<input type="hidden" name="C" value="system"/>
+			<input type="hidden" name="A" value="backup" />
+			<input type="submit" class="button" value=" 开始备份 "/>
+		</div>
+	</form>
+	<h1>数据库恢复</h1>
+	<form method="post" class="white-box" action="admin.php" enctype="multipart/form-data"
+	name="restoreForm" onsubmit="submitForm(this);return false">
+		<div class="border-tip">
+			<img src="images/tip.gif" align="absmiddle"/> 本地上传的数据库文件不能超过{maxPostFileSize}。
+		</div>
+		<div>
+			<span>恢复选项</span>
+			<input type="radio" name="restoreType"	value="server" onclick="shift('fname','dbfile')" id="rt1"/>
+			<label for="rt1">从服务器上恢复</label>
+			<input type="radio" name="restoreType"	value="client" checked="true" onclick="shift('dbfile','fname')" id="rt2"/>
+			<label for="rt2">从本地上传</label>
+		</div>
+		<div>
+			<span>数据库文件</span>
+			<select name="fname" id="fname" class="none" onchange='toggleButton()'>
+				<option value=''>请选择数据库文件</option>
+				<!-- BEGIN fileList -->
+				<option value="{file}">{file}</option>
+				<!-- END fileList -->
+			</select>
+			<input type="file" name="dbfile" id="dbfile"/>
+			<cite id="btn" class="none">
+			<input type="submit" value="删除" class="small-button" onclick="this.form.elements['A'].value='delete'"/>
+			<input type="submit" value="下载" class="small-button" onclick="this.form.elements['A'].value='download'"/>
+			</cite>
+			<h3 id="s-msg"></h3>
+		</div>
+		<div class="wide">
+			<span></span>
+			<input type="hidden" name="C" value="system"/>
+			<input type="hidden" name="A" value="restore"/>
+			<input type="submit" class="button" value=" 开始恢复 " onclick="this.form.elements['A'].value='restore'"/>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+//切换恢复选项
+function shift( showObj, hideObj )
+{
+	Utility.showInline(showObj);
+	Utility.hide(hideObj);
+	if(showObj == 'dbfile')
+		Utility.hide('btn');
+	else
+	{
+		if($(showObj).selectedIndex != 0)
+			Utility.showInline('btn');
+	}
+
+}
+//给出提示信息并提交表单
+function submitForm( form )
+{
+	if( form.name == "restoreForm" )
+	{
+		if( form.dbfile.value == '' && form.restoreType[1].checked )
+		{
+			$( "s-msg" ).innerHTML = "请选择要上传的数据文件.";
+			Utility.visible("s-msg");
+			return false;
+		}
+		if( form.fname.selectedIndex == 0 && form.restoreType[0].checked)
+		{
+			$( "s-msg" ).innerHTML = "没有选择数据库文件.";
+			Utility.visible("s-msg");
+			return false;
+		}
+	}
+
+	//禁用按钮
+	disableButton(document.forms[0]);
+	disableButton(document.forms[1]);
+
+	//显示提示信息
+	if(form.elements['A'].value != 'delete' && 
+	   form.elements['A'].value != 'download')
+	{
+		var msg = form.name == "dumpForm" ? "正在备份..." : "正在恢复...";	
+		var msgbox = parent.$('tip-box');
+		var container = parent.$('container');
+		container.innerHTML = "<img src='images/loading.gif' align='absmiddle'/> " + msg;
+		Utility.center(msgbox);	
+		Utility.visible(msgbox);
+	}
+	form.submit();
+}
+
+//禁用表单按钮
+function disableButton(f)
+{
+	for(i=0;i<f.elements.length;i++)
+	{
+		if(f[i].tagName.toLowerCase() != "input") continue;
+		t = f[i].type.toLowerCase();
+		if( t == "submit" || t == "button" )
+			f[i].disabled = true;
+	}
+}
+function toggleButton()
+{
+	if( document.restoreForm.fname.selectedIndex != 0 )
+		Utility.showInline('btn');
+	else
+		Utility.hide('btn');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{head}
+<style>
+form span{
+	width:15%;
+}
+</style>
+<form action="admin.php" method="post" class="body" onsubmit="return ckForm(this)" enctype="multipart/form-data">
+	<h1>{act}友情链接</h1>
+	<div> 
+		<span>网站名称</span> 
+		<input type="text"  class="highlight" name="title" value="{title}" size="25" rule="required" tip="网站名称不能为空"/>
+	</div>
+	<div> 
+		<span>网站地址</span> 
+		<input type="text"  class="highlight" name="url" value="{url}" size="25" rule="required" tip="网站地址不能为空"/>
+	</div> 
+	<div> 
+		<span>链接类型</span> 
+		<input type="radio" name="type" value="1" checked="checked" id="lt-1" onclick="Utility.hide('fileArea')"/>
+		<label for="lt-1">文字链接</label>
+		<input type="radio" name="type" value="2" id="lt-2" onclick="Utility.show('fileArea')"/>
+		<label for="lt-2">图片链接</label>
+	</div>
+	<div class="none" id="fileArea">
+		<span>上传图片</span>
+		<input type="file" name="image"/>
+		<label style="margin-left:10px;color:#f60;display:none" id="fileTip">请选择图片</label>
+	</div>
+	<div>
+		<span></span>
+		<input type="submit" class="button" value="确定"/>
+		　<input type="button" class="button" value="返回" onclick="history.back()"/>
+		<input type="hidden" name="C" value="link"/>
+		<input type="hidden" name="A" value="save"/>
+		<input type="hidden" name="id" value="{id}"/>
+	</div>
+</form>
+<script type="text/javascript">
+function ckForm(f)
+{
+	if(!Validator.validate(f)) return false;
+	if(f.elements['type'][1].checked && f.elements['image'].value == '' && f.elements['id'].value == '')
+	{
+		Utility.showInline('fileTip');
+		return false;
+	}
+	Utility.hide('fileTip');
+	return true;
+	
+}
+Utility.checkRadio('type', '{type}');
+
+if('{type}' == 2)
+{
+	Utility.show('fileArea');
+}
+</script>
+</body>

@@ -1,0 +1,94 @@
+{head}
+<style>
+#ckall,#ckall2{
+	margin-left:7px;
+	_margin-left:3px;
+}
+#searchForm{
+	margin:10px;
+}
+#searchButton{
+	background:url(images/button_over_bg.gif);
+	border:none;
+	padding:4px 11px 5px 10px;
+	_padding:4px 6px 4px 5px;
+}
+</style>
+<div class="body">
+	<h1>文章管理</h1>
+	<form action="admin.php" method="get" id="searchForm" validate="true">
+		文章标签：<input type="text" name="tag" size="25" class="highlight" rule="required" tip="请输入关键字"/>
+		<select name="sort_id" id="sort_id" onchange="loc('article','index','sort_id='+this.value)">
+		<option value="">请选择文章分类</option>
+		<!-- BEGIN sort -->
+		<option value="{id}">{title}</option>
+		<!-- END sort -->
+		</select>
+		<input type="submit" value="查 找" class="small-button"/>
+		<input type="hidden" name="C" value="article"/>
+	</form>
+	<div class="border-tip">
+		<img src="images/tip.gif" align="absmiddle"/> 单击进行选择，双击编辑项目，按delete键可删除选中的项目。
+	</div>
+	<div id="toolbar-top">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall"/>
+		<label for="ckall">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('article')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>		
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Model.Recmd(1)" class="link-button" hidefocus="true"><img src="images/recmd.gif" align="absmiddle"/> 推荐</a><a href="javascript:Model.Recmd(0)" class="link-button-wide" hidefocus="true"><img src="images/recmd2.gif" align="absmiddle"/> 取消推荐&nbsp;</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Model.Audit(1)" class="link-button" hidefocus="true"><img src="images/audit.gif" align="absmiddle"/> 审核</a><a href="javascript:Model.Audit(0)" class="link-button" hidefocus="true"><img src="images/lock.gif" align="absmiddle"/> 锁定</a><a href="javascript:Model.Audit(1,'all=1')" class="link-button-wide" hidefocus="true"><img src="images/audit.gif" align="absmiddle"/> 审核全部</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Model.UpdateArticleById()" class="link-button" hidefocus="true" title="生成(更新)选择文章的XML页面"><img src="images/update_small.gif" align="absmiddle"/> 更新</a><a href="javascript:loc('article','save')" class="link-button" hidefocus="true"><img src="images/add_small.gif" align="absmiddle"/> 添加</a>
+	</div>
+	<table class="list" cellspacing="0">
+	<tr>
+		<th>&nbsp;</th>
+		<th width="60%">标 题</th>
+		<th width="15%">类 别</th>
+		<th width="15%">日 期</th>
+		<th width="10%">状态</th>
+	</tr>
+	<!-- BEGIN artList -->
+	<tr onclick="TRSelect.toggle(this)" onmouseover="this.className='tr-over'" onmouseout="if(!this.selected)this.className=''" title="单击选择该条记录" ondblclick="loc('article','save','id={id}')">
+		<td><input type="checkbox" name="id[]" value="{id}"/></td>
+		<td>{thumb} <a href="html/{sort_id}/{id}.htm" target="_blank">{title}</a> <span class='red'>{is_recmd}</span></td>
+		<td><a href="admin.php?C=article&sort_id={sort_id}" title="点击查看该分类下的文章">{sort}</a></td>
+		<td>{post_time}</td>
+		<td>{auditText}</td>
+	</tr>
+	<!-- END artList -->
+	<tr class="{noRecord}">
+		<td colspan="5" id="no-record">该分类下没有文章.</td>
+	</tr>
+	</table>
+	<div id="pager">
+		{pager}
+	</div>
+	<div id="toolbar">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall2"/>
+		<label for="ckall2">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('article')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Model.Recmd(1)" class="link-button" hidefocus="true"><img src="images/recmd.gif" align="absmiddle"/> 推荐</a><a href="javascript:Model.Recmd(0)" class="link-button-wide" hidefocus="true"><img src="images/recmd2.gif" align="absmiddle"/> 取消推荐&nbsp;</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Model.Audit(1)" class="link-button" hidefocus="true"><img src="images/audit.gif" align="absmiddle"/> 审核</a><a href="javascript:Model.Audit(0)" class="link-button" hidefocus="true"><img src="images/lock.gif" align="absmiddle"/> 锁定</a><a href="javascript:Model.Audit(1,'all=1')" class="link-button-wide" hidefocus="true"><img src="images/audit.gif" align="absmiddle"/> 审核全部</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Model.UpdateArticleById()" class="link-button" hidefocus="true" title="生成(更新)选择文章的XML页面"><img src="images/update_small.gif" align="absmiddle"/> 更新</a><a href="javascript:loc('article','save')" class="link-button" hidefocus="true"><img src="images/add_small.gif" align="absmiddle"/> 添加</a>
+	</div>
+</div>
+<script type="text/javascript">
+function ondelete(e){
+	e = window.event || e;
+	t = e.srcElement || e.target;
+	if(t.tagName == "INPUT" && t.type == "text") return;
+	if(e.keyCode == 46)
+		Model.Delete('article');
+}
+Event.observe(document,'keyup', ondelete);
+$('sort_id').value = '{currentSortId}';
+</script>
+</body>
+</html>

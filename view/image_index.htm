@@ -1,0 +1,123 @@
+{head}
+<style>
+#ckall,#ckall2{
+	margin-left:7px;
+	_margin-left:3px;
+}
+#galleryList{
+	clear:both;
+	width:99%;
+	border-top:1px solid #d9d9d9;
+	background:#f7f7f7;
+}
+.gallery{
+	float:left;
+	width:145px;
+	height:120px;
+	padding:8px;
+	text-align:center;
+	border:1px solid #f7f7f7;
+	margin:4px 6px;
+}
+.gallery img{	
+	border:1px solid #D5DADE;
+	padding:6px;
+	background:#fff;
+	width:120px;
+	height:100px;
+}
+.gallery p{
+	margin: 4px;
+	overflow:hidden;
+	white-space:nowrap;
+	width:100%;
+}
+.gallery p a{
+	color:#69c;
+}
+.select{
+	background:#ECF5FF;
+	border:1px solid #6BBAEF;
+}
+p#galleryTitle{
+	margin:8px 0;
+}
+form#addImage{
+	margin:10px 0;
+}
+</style>
+<div class="body">
+	<h1>
+	<a href="javascript:history.back()" style="float:right"><img src="images/back.gif" align="absmiddle"/> 返回</a>	
+	图片集管理 - <span class="orange">{galleryTitle}</span></h1>
+	<form method="post" action="admin.php" name="addImage" id="addImage" validate="true" enctype="multipart/form-data">
+		在此相册添加新的图片：
+		标题 <input type="text" name="title" size="20"/>
+		<input type="file" name="image[]" rule="required" tip="请选择图片"/>
+		<input type="submit" class="small-button" value="上 传"/>
+		<input type="hidden" name="C" value="image"/>
+		<input type="hidden" name="A" value="save"/>
+		<input type="hidden" name="gallery_id" value="{gallery_id}"/>
+	</form>
+	<div class="border-tip">
+		<img src="images/tip.gif" align="absmiddle"/> 单击进行选择，按delete键可删除选中的项目。
+	</div>
+	<div id="toolbar-top">
+		<input type="checkbox" onclick="Gallery.selectAll(this.checked)" id="ckall"/>
+		<label for="ckall">全选</label> 
+		选中项：
+		<a href="javascript:Gallery.Delete('image')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+	</div>
+	<div id="galleryList">
+		<!-- BEGIN imageList -->
+		<div title="{image}" class="gallery" onclick="Gallery.toggle(this)" ondblclick="showImage('{image}')">
+			<img src="{image}"/>
+			<!--<p>{title}</p>-->
+			<input type="checkbox" name="id[]" value="{id}" class="none"/>
+		</div>
+		<!-- END imageList -->
+		<div class="clear"></div>
+	</div>
+	<div class="{noRecord}" style="border:1px solid #ABBA9D" id="no-record">
+		没有任何记录.
+	</div>
+	<div id="toolbar">
+		<input type="checkbox" onclick="Gallery.selectAll(this.checked)" id="ckall2"/>
+		<label for="ckall2">全选</label> 
+		选中项：
+		<a href="javascript:Gallery.Delete('image')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+	</div>
+</div>
+<script type="text/javascript">
+function ondelete(e){
+	e = window.event || e;
+	t = e.srcElement || e.target;
+	if(t.tagName == "INPUT" && t.type == "text") return;
+	if(e.keyCode == 46)
+		Gallery.Delete();
+}
+
+function showImage(src){
+	/*
+	if(!parent.$('ic'))
+	{
+		imgContainer = parent.document.createElement("div");
+		imgContainer.id = "ic";
+		imgContainer.style.position = "absolute";
+		imgContainer.style.border = "2px solid #8ABA18";
+		imgContainer.style.background= "#666";
+		imgContainer.style.padding="30%";
+		parent.document.body.appendChild(imgContainer);
+	}
+	parent.$('ic').innerHTML = "<img src='"+src+"' width='500'/>";
+	Utility.center(parent.$('ic'));
+	Utility.visible(parent.$('ic'));
+	*/
+}
+function close(){
+	Utility.hidden(parent.$('ic'));
+}
+Event.observe(document,'keyup', ondelete);
+</script>
+</body>
+</html>

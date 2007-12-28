@@ -1,0 +1,49 @@
+{head}
+<style>
+#ckall,#ckall2{
+	margin-left:7px;
+	_margin-left:3px;
+}
+#searchForm{
+	margin:10px;
+}
+#searchButton{
+	background:url(images/button_over_bg.gif);
+	border:none;
+	padding:4px 11px 5px 10px;
+	_padding:4px 6px 4px 5px;
+}
+</style>
+<div class="body">
+<h1>采集文章</h1>
+<div class="border-tip">
+	当前规则 <span class="orange">{name}</span> ｜
+	列表页数 <span class="red">{page}</span> ｜
+	获得链接数 <span class="red">{links}</span> ｜
+	已采集 <span class="red">{total_save}</span>　
+	<input type="button" class="small-button" value="采集" onclick="Scratcher.ScratchPage({id})"/>　
+	<input type="button" class="small-button" value="入库" onclick="Scratcher.SaveToDB({id})"/>　
+	<input type="button" class="small-button" value="返回" onclick="history.back()"/>
+</div>
+<table class="list" cellspacing="0">
+<tr>
+	<th width="5%">&nbsp;</th>
+	<th width="35%">标 题</th>
+	<th width="60%">链接地址</th>
+</tr>
+<!-- BEGIN linkList -->
+<tr onmouseover="this.className='tr-over'" onmouseout="this.className=''">
+	<td>{id}</td>
+	<td>{title}</td>
+	<td><div style="word-break:break-all;overflow:hidden">{url}</div></td>
+</tr>
+<!-- END linkList -->
+<tr class="{noRecord}">
+	<td colspan="5" id="no-record">没有获得任何链接数.</td>
+</tr>
+</table>
+<div id="pager">
+	{pager}
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{head}
+<style>
+iframe#main{
+	width:100%;
+}
+.reload{
+	float:left;
+	margin:0;
+}
+</style>
+<script type="text/javascript">
+Event.observe(window, 'load', toggleMenu);
+</script>
+<div id="head">
+	<img id="logo" src="images/xlite.gif"/>
+</div>
+<ul id="menu">
+	<li for="tab_option">系统设置</li>
+	<li for="tab_remote">远程发布</li>
+	<li for="tab_plugin">插件管理</li>
+	<li for="tab_scratch">采集器</li>
+	<li for="tab_sort">分类管理</li>
+	<li for="tab_gallery">图片管理</li>
+	<li for="tab_article">文章管理</li>
+	<li class="active" for="tab_index" jump="index,main">首 页</li>
+</ul>
+<div class="submenu">
+	<div class="sub-menu-show" id="tab_index">
+		欢迎您：{user_name}！ <a href="admin.php?C=index&A=logout" class="logout">退出系统</a>
+	</div>
+	<div class="sub-menu" id="tab_article">	
+	<a href="admin.php?C=article&A=save" target="main">文章添加</a>
+	<a href="admin.php?C=article" target="main">文章管理</a>
+	<a href="admin.php?C=tags" target="main">标签管理</a>
+	<a href="admin.php?C=comment" target="main">评论管理</a>
+	<a href="admin.php?C=update&A=updateIndex" target="main">更新首页</a>
+	</div>
+	<div class="sub-menu" id="tab_gallery">
+	<a href="admin.php?C=gallery&A=save" target="main">添加图片集</a>
+	<a href="admin.php?C=gallery" target="main">图片集管理</a>
+	</div>
+	<div class="sub-menu" id="tab_sort">
+	<a href="admin.php?C=sort" target="main">分类列表</a>
+	<a href="admin.php?C=sort&A=updateXML" target="main">更新xml文件</a>
+	</div>
+	<div class="sub-menu" id="tab_scratch">
+	<a href="admin.php?C=scratcher" target="main">规则管理</a>
+	<a href="admin.php?C=scratcher&A=save" target="main">新建规则</a>
+	</div>
+	<div class="sub-menu" id="tab_plugin">
+	<a href="admin.php?C=guestbook" target="main">留言板</a>
+	<a href="admin.php?C=link" target="main">友情链接</a>
+	</div>
+	<div class="sub-menu" id="tab_remote">
+	<a href="admin.php?C=ftp" target="main">FTP管理</a>
+	<a href="admin.php?C=ftp&A=save" target="main">新增FTP</a>
+	</div>
+	<div class="sub-menu" id="tab_option">
+	<a href="admin.php?C=system" target="main">系统信息</a>
+	<a href="admin.php?C=admin" target="main">账号管理</a>
+	<a href="admin.php?C=role" target="main">用户组管理</a>
+	<a href="admin.php?C=system&A=setPwd" target="main">密码修改</a>
+	<a href="admin.php?C=system&A=backup" target="main">数据备份</a>
+	</div>
+</div>
+<iframe src="admin.php?A=main" id="main" name="main" frameborder="no" scrolling="no"></iframe>
+<div id="tip-box">
+<iframe frameborder="no" scrolling="no" width="100%"></iframe>
+<div id="container"></div>
+</div>
+<div id="progress-box">
+<iframe frameborder="no" scrolling="no" width="100%"></iframe>
+<div id="bar"></div>
+</div>
+{foot}

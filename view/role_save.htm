@@ -1,0 +1,67 @@
+{head}
+<style>
+form span{
+	width:15%;
+}
+ul{
+	clear:both;
+	list-style:none;
+	margin-left:8%;
+}
+ul li.act{
+	width:150px;
+	float:left;
+	margin:2px 0;
+	padding:0;
+}
+#btn{
+	text-align:center;
+	margin-top:15px;
+	border-top:2px solid #6BBAEF;
+	padding-top:10px;
+}
+</style>
+<form action="admin.php" method="post" class="body" onsubmit="return ckForm(this)" enctype="multipart/form-data">
+	<h1>{title}用户组</h1>
+	<div class="with-line"> 
+		<span>用户组名称</span> 
+		<input type="text"  class="highlight" name="role[role_name]" value="{role_name}" size="25" rule="required" tip="用户组名称不能为空"/>
+	</div>
+	<div>
+		<span>请在下面选择权限</span>
+	</div>
+	<div>		
+		<!-- BEGIN actList -->
+		<ul>
+			<!-- BEGIN group -->
+			<li class="act">
+			<input type="checkbox" name="act[]" value="{act_id}" id="act_{act_id}"/>
+			<label for="act_{act_id}"/>{act_name}</label>
+			</li>
+			<!-- END group -->
+		</ul>
+		<!-- END actList -->
+	</div>
+	<div id="btn">
+		<input type="submit" class="button" value="确定"/>&nbsp;&nbsp;&nbsp;
+		<input type="button" class="button" value="返回" onclick="history.back()"/>
+		<input type="hidden" name="C" value="role"/>
+		<input type="hidden" name="A" value="save"/>
+		<input type="hidden" name="role[role_id]" value="{role_id}"/>
+	</div>
+</form>
+<script type="text/javascript">
+function initCheckStatus()
+{
+	var roleAct = [{roleAct}];
+	if(roleAct.length == 0) return false;
+	var acts = document.getElementsByName("act[]");
+	for(var i=0;i<acts.length;i++)
+	{
+		if(roleAct.indexOf(acts[i].value) != -1)
+			acts[i].checked = true;
+	}
+}
+initCheckStatus();
+</script>
+</body>

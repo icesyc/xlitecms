@@ -1,0 +1,179 @@
+{head}
+<style>
+#ckall,#ckall2{
+	margin-left:7px;
+	_margin-left:3px;
+}
+#addForm{
+	margin:10px;
+	background:url(images/add_small.gif) no-repeat left 80%;
+	padding-left:20px;
+}
+#add-box, #edit-box{
+	z-index:9999;
+	position:absolute;
+	font-size:12px;
+	color:#000;
+	text-align:center;
+	left:0;
+	top:0;
+	width:296px;
+	visibility:hidden;
+}
+#add-box iframe, #edit-box iframe{
+	height:102px;
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:-1;
+}
+#add-box form, #edit-box form{
+	background:url(images/msg_bg2.gif) no-repeat;
+	padding:0 0 40px;
+}
+#add-box .box-title, #edit-box .box-title{
+	font-family:arial;
+	font-weight:bold;
+	text-align:left;
+	margin:0;	
+	padding:4px 5px 28px 25px;
+}
+#add-box img, #edit-box img{
+	cursor:pointer;
+	float:right;
+}
+#sortId{
+	font-size:10px;
+	color:#f60;
+	margin-left:6px;
+}
+</style>
+<script type="text/javascript">
+function showAddForm(id){
+	Utility.hidden('edit-box');
+	Utility.center('add-box',-110);
+	Utility.visible('add-box');
+	document.addSubForm.parentId.value = id;
+}
+function showEditForm(id){
+	Utility.hidden("add-box");
+	Utility.center('edit-box',-110);
+	Utility.visible('edit-box');
+	document.editForm.id.value = id;
+}
+function closeForm(f){
+	Utility.hidden(f);
+}
+function ckform(f){
+	if(f.elements["title"].value == "" || f.elements["title"].value == "请输入标题")
+	{
+		f.elements["title"].value = "请输入标题";
+		f.elements["title"].select();
+		return false;
+	}
+	return true;
+}
+
+</script>
+<div class="body">
+	<div id="add-box">
+		<iframe frameborder="no" scrolling="no" width="100%"></iframe>
+		<form name="addSubForm" method="post" action="admin.php" onsubmit="return ckform(this)">
+			<div class="box-title">
+			<img src="images/close.gif" onclick="closeForm('add-box')"/>
+			Xlite －添加子分类</div>
+			<input type="text" size="20" class="textbox" name="title"/>
+			<input type="image" src="images/submit.gif" align="absmiddle"/>
+			<input type="hidden" name="C" value="sort"/>
+			<input type="hidden" name="A" value="save"/>
+			<input type="hidden" name="parentId"/>
+			<input type="hidden" name="position" value="last"/>
+		</form>
+	</div>
+	<div id="edit-box">
+		<iframe frameborder="no" scrolling="no" width="100%"></iframe>
+		<form name="editForm" method="post" action="admin.php" onsubmit="return ckform(this)">
+			<div class="box-title">
+			<img src="images/close.gif" onclick="closeForm('edit-box')"/>
+			Xlite －修改分类名称</div>
+			<input type="text" size="20" class="textbox" name="title"/>
+			<input type="image" src="images/submit.gif" align="absmiddle"/>
+			<input type="hidden" name="C" value="sort"/>
+			<input type="hidden" name="A" value="save"/>
+			<input type="hidden" name="id"/>
+		</form>
+	</div>
+	<h1>分类管理</h1>
+	<form action="admin.php" method="post" id="addForm" validate="true">
+		添加分类：<input type="text" name="title" size="25" rule="required" tip="请输入分类名称" class="highlight"/>
+		<select name="parentId">
+		<option value="">请选择上级分类</option>
+		<!-- BEGIN sortSelect -->
+		<option value="{id}">{title}</option>
+		<!-- END sortSelect -->
+		</select>
+		<select name="position">
+			<option value="last">加在最后</option>
+			<option value="first">加在最前</option>
+		</select>
+		<input type="submit" value="添 加" class="small-button"/>
+		<input type="hidden" name="C" value="sort"/>
+		<input type="hidden" name="A" value="save"/>
+	</form>
+	<div class="border-tip">
+		<img src="images/tip.gif" align="absmiddle"/> 单击进行选择，双击编辑项目，按delete键可删除选中的项目。<br/>
+		　 桔黄色数据为分类的id。
+	</div>
+	<div id="toolbar-top">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall"/>
+		<label for="ckall">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('sort')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Model.UpdateList()" class="link-button" hidefocus="true" title="生成(更新)选择栏目的列表页面"><img src="images/update_small.gif" align="absmiddle"/> 更新</a>
+		<a href="javascript:Model.UpdateSortArticle()" class="link-button" hidefocus="true" title="生成(更新)选择栏目的文章页面"><img src="images/update_page.gif" align="absmiddle"/> 更新</a>
+	</div>
+	<table class="list" cellspacing="0">
+	<tr>
+		<th width="55%">&nbsp;</th>
+		<th width="45%">&nbsp;</th>
+	</tr>
+	<!-- BEGIN sortList -->
+	<tr onclick="TRSelect.selectChild(this)" onmouseover="this.className='tr-over'" onmouseout="if(!this.selected)this.className=''" title="单击选择该条记录" ondblclick="showEditForm({id})" deep="{deep}">
+		<td>{title}<span id="sortId">[{id}]</span></td>
+		<td>
+		<a href="javascript:void(null)" onclick="showAddForm({id});Event.stop(event)" title="添加子类"><img src="images/add_small.gif" align="absmiddle"/>
+		添加子类</a>
+		<a href="javascript:void(null)" onclick="if(confirm('确实要删除吗？'))jump('sort','delete','id={id}');Event.stop(event)" title="删除"><img src="images/delete.gif" align="absmiddle" title="删除"/> 删除</a>
+		<a href="javascript:void(null)" onclick="showEditForm({id});Event.stop(event)" title="修改分类名称"><img src="images/edit.gif" align="absmiddle" title="修改分类名称"/> 修改</a>
+		<a href="javascript:void(null)" onclick="Model.UpdateList({id});Event.stop(event)" title="更新列表"><img src="images/update_small.gif" align="absmiddle" /> 更新列表</a>
+		<a href="javascript:void(null)" onclick="Model.UpdateSortArticle({id});Event.stop(event)" title="更新页面"><img src="images/update_page.gif" align="absmiddle"/> 更新页面</a>
+		</td>
+	</tr>
+	<!-- END sortList -->
+	<tr class="{noRecord}">
+		<td colspan="2" id="no-record">还没有任何分类.</td>
+	</tr>
+	</table>
+	<div id="toolbar">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall2"/>
+		<label for="ckall2">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('sort')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Model.UpdateList()" class="link-button" hidefocus="true" title="生成(更新)选择栏目的列表页面"><img src="images/update_small.gif" align="absmiddle"/> 更新</a>
+		<a href="javascript:Model.UpdateSortArticle()" class="link-button" hidefocus="true" title="生成(更新)选择栏目的文章页面"><img src="images/update_page.gif" align="absmiddle"/> 更新</a>
+	</div>
+</div>
+<script type="text/javascript">
+function ondelete(e){
+	e = window.event || e;
+	t = e.srcElement || e.target;
+	if(t.tagName == "INPUT" && t.type == "text") return;
+	if(e.keyCode == 46)
+		Model.Delete('sort');
+}
+Event.observe(document,'keyup', ondelete);
+</script>
+</body>
+</html>

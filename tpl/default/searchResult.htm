@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Xlite 1.0</title>
+<meta http-equiv="content-type" content="text/html;charset=gb2312"/>
+<meta name="Generator" content="EditPlus"/>
+<meta name="Author" content="ice_berg16(寻梦的稻草人)"/>
+<link rel="stylesheet" href="/tpl/default/global.css" type="text/css"/>
+<style>
+#top-bar{
+	padding:4px 10px;
+	border:1px solid #ABBA9D;
+	background:#ffd;
+	margin:10px 0;
+}
+#summary{
+	padding:4px 10px;
+	margin:10px 0;
+	line-height:150%;
+}
+#postTime{
+	float:right;
+	color:#666;
+	font-size:10px;
+	width:100px;
+}
+h1#top-nav{
+	font-size:12px;
+}
+#searchForm{
+	border-top:4px solid #6BBAEF;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	background:#FFd;
+	padding:6px;
+	text-align:center;
+}
+#searchForm p{
+	margin:5px;
+}
+#searchForm a{
+	color:#F60;
+}
+ul.list a{
+	color:#0063DC;
+}
+ul.list a:hover{
+	text-decoration:underline;
+	color:
+}
+</style>
+</head>
+<body>
+
+<!-- 头部 -->
+<div id="head">
+	<a href="/"><img id="logo" src="/images/xlite.gif"/></a>
+</div>
+
+<!-- 栏目导航条 -->
+<form method="get" action="search.php" id="searchForm">
+	<p>
+	热门搜索：
+	<!-- xliteTag name="hotTags" number="6" -->
+	<a href="/plugin/search.php?keyword={encKeyword}">{keyword}</a>
+	<!-- /xliteTag -->
+	</p>
+	<!-- xliteTag name="variable" -->
+	<input type="text" name="keyword" size="40" value="{keyword}"/>
+	<!-- /xliteTag -->
+	<input type="submit" value=" 搜 索 "/>
+</form>
+<div class="body">
+	<!-- 新闻列表 -->
+	<ul class="list">
+		<!-- xliteTag name="article" sort="search" number="10" -->
+		<li>
+		<span id="postTime">{postTime}</span>
+		<a href="{link}">{title}</a>
+		<div id="summary">{summary}</div>
+		</li>
+		<!-- /xliteTag -->
+	</ul>
+
+	<!-- 分页导航条 -->
+	<!-- xliteTag name="pager" -->
+	<div id="pager">{pager}</div>
+	<!-- /xliteTag -->
+
+</div>
+<!-- 尾部 -->
+<div id="foot">
+	<p id="copyright">Powered By <a href="http://www.xlite.cn">Xlite 1.0</a></p>
+</div>
+</body>
+</html>
