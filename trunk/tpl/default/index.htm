@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Xlite 1.0</title>
+<meta http-equiv="content-type" content="text/html;charset=gb2312"/>
+<meta name="Generator" content="EditPlus"/>
+<meta name="Author" content="ice_berg16(寻梦的稻草人)"/>
+<link rel="stylesheet" href="tpl/default/global.css" type="text/css"/>
+<link rel="stylesheet" href="tpl/default/index.css" type="text/css"/>
+</head>
+<body>
+
+<!-- 头部 -->
+<div id="head">
+	<a href="/"><img id="logo" src="/images/xlite.gif"/></a>
+</div>
+
+<!-- 栏目导航条 -->
+<div class="body">
+<ul id="menu">	
+	<li><a href="/">首页</a></li>
+	<!-- xliteTag name="sort" select="1,14,19,25" -->
+	<li>
+		<a href="{link}">{title}</a>
+	</li>
+	<!-- /xliteTag -->
+</ul>
+</div>
+
+<!-- 第一屏 -->
+<div class="body">
+	<!-- 图片新闻 -->
+	<div id="top-right">
+	<h1>最新图片新闻</h1>
+	<ul id="pic-news">
+		<!-- xliteTag name="article" number="3" thumbnail="1" length="8" -->
+		<li>
+			<a href="{link}"><img src="{thumbnail}" class="news-thumb"/></a><br/>
+			<a href="{link}">{title}</a><br/>
+		</li>
+		<!-- /xliteTag -->
+	</ul>
+	</div>
+	<div id="top-left">
+		<div class="inner-left">
+			<!-- 栏目导航 -->
+			<ul class="sortnav">				
+				<li>
+					<!-- xliteTag name="sort" select="1" -->
+					<a href="{link}" class="sortHead">{title}</a>
+					<!-- /xliteTag -->
+					<!-- xliteTag name="sortNavigator" select="1" number="4" onlyChild="1" -->
+					<a href="{link}">{title}</a>					
+					<!-- /xliteTag -->
+				</li>
+				<li>
+					<!-- xliteTag name="sort" select="14" -->
+					<a href="{link}" class="sortHead">{title}</a>
+					<!-- /xliteTag -->
+					<!-- xliteTag name="sortNavigator" select="14" number="4" onlyChild="1"  -->
+					<a href="{link}">{title}</a>					
+					<!-- /xliteTag -->
+				</li>
+				<li>
+					<!-- xliteTag name="sort" select="19" -->
+					<a href="{link}" class="sortHead">{title}</a>
+					<!-- /xliteTag -->
+					<!-- xliteTag name="sortNavigator" select="19" number="4" onlyChild="1"  -->
+					<a href="{link}">{title}</a>					
+					<!-- /xliteTag -->
+				</li>
+				<li>
+					<!-- xliteTag name="sort" select="25" -->
+					<a href="{link}" class="sortHead">{title}</a>
+					<!-- /xliteTag -->
+					<!-- xliteTag name="sortNavigator" select="25" number="4" onlyChild="1" -->
+					<a href="{link}">{title}</a>					
+					<!-- /xliteTag -->
+				</li>
+			</ul>
+			<!-- 热门标签导航 -->
+			<div id="tags">
+				<!-- xliteTag name="hotTags" number="6" -->
+				<a href="/plugin/search.php?keyword={encKeyword}">{keyword}</a>
+				<!-- /xliteTag -->
+				<form action="/plugin/search.php" method="get">
+					<input type="text" name="keyword"/>
+					<input type="submit" value="搜索"/>
+				</form>
+			</div>
+		</div>
+		<div class="inner-main">
+			<!-- 最新资讯 -->
+			<h1>最新资讯</h1>
+			<ul class="news-list">
+				<!-- xliteTag name="article" number="10" df="m-d" -->
+				<li>
+				<span class="postTime">[{postTime}]</span>
+				[<a href="html/{sortId}/list_1.htm">{sort}</a>]
+				<a href="{link}">{title}</a>			
+				</li>
+				<!-- /xliteTag -->
+			</ul>
+		</div>
+		<!-- 相册 -->
+		<div id="gallery-block">
+			<h1>相册</h1>
+			<ul id="gallery">
+				<!-- xliteTag name="gallery" number="4" -->
+				<li>
+				<a href="{link}"><img src="{thumbnail}"/></a><br/>
+				<p><a href="{link}">{title}</a></p>
+				</li>
+				<!-- /xliteTag -->
+			</ul>
+			<div class="clear" style="margin-bottom:8px"></div>
+		</div>
+	</div>
+</div>
+<div class="body">
+<!-- 输出分类文章 -->
+	<div class="left-block">
+		<!-- xliteTag name="sort" select="1" -->
+		<h1>{title}</h1>
+		<!-- /xliteTag -->
+		<ul class="list">
+			<!-- xliteTag name="article" sort="1" number="8" length="14" df="m-d" -->
+			<li>
+			<span class="postTime">[{postTime}]</span>
+			<a href="{link}">{title}</a>
+			</li>
+			<!-- /xliteTag -->
+		</ul>
+	</div>
+	<div class="right-block">
+		<!-- xliteTag name="sort" select="14" -->
+		<h1>{title}</h1>
+		<!-- /xliteTag -->
+		<ul class="list">
+			<!-- xliteTag name="article" sort="14" number="8" length="14" df="m-d" -->
+			<li>
+			<span class="postTime">[{postTime}]</span>
+			<a href="{link}">{title}</a>
+			</li>
+			<!-- /xliteTag -->
+		</ul>
+	</div>
+	<div class="center-block">
+		<!-- xliteTag name="sort" select="19" -->
+		<h1>{title}</h1>
+		<!-- /xliteTag -->
+		<ul class="list">
+			<!-- xliteTag name="article" sort="19" number="8" length="14" df="m-d" -->
+			<li>
+			<span class="postTime">[{postTime}]</span>
+			<a href="{link}">{title}</a>
+			</li>
+			<!-- /xliteTag -->
+		</ul>
+	</div>
+</div>
+<div class="body">
+	<img src="tpl/default/images/banner.gif"/>
+</div>
+<div class="body">
+<!-- 输出分类文章第二行 -->
+	<div class="left-block">
+		<!-- xliteTag name="sort" select="38" -->
+		<h1>{title}</h1>
+		<!-- /xliteTag -->
+		<ul class="list">
+			<!-- xliteTag name="article" sort="38" number="8" length="14" df="m-d" -->
+			<li>
+			<span class="postTime">[{postTime}]</span>
+			<a href="{link}">{title}</a>
+			</li>
+			<!-- /xliteTag -->
+		</ul>
+	</div>
+	<div class="right-block">
+		<!-- xliteTag name="sort" select="43" -->
+		<h1>{title}</h1>
+		<!-- /xliteTag -->
+		<ul class="list">
+			<!-- xliteTag name="article" sort="43" number="8" length="14" df="m-d" -->
+			<li>
+			<span class="postTime">[{postTime}]</span>
+			<a href="{link}">{title}</a>
+			</li>
+			<!-- /xliteTag -->
+		</ul>
+	</div>
+	<div class="center-block">
+		<!-- xliteTag name="sort" select="44" -->
+		<h1>{title}</h1>
+		<!-- /xliteTag -->
+		<ul class="list">
+			<!-- xliteTag name="article" sort="44" number="8" length="14" df="m-d" -->
+			<li>
+			<span class="postTime">[{postTime}]</span>
+			<a href="{link}">{title}</a>
+			</li>
+			<!-- /xliteTag -->
+		</ul>
+	</div>
+</div>
+<!-- 尾部 -->
+<div id="foot">
+	<p id="copyright">Powered By <a href="http://www.xlite.cn">Xlite 1.0</a></p>
+</div>
+</body>
+</html>

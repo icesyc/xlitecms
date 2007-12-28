@@ -1,0 +1,168 @@
+{head}
+<style>
+#ckall,#ckall2{
+	margin-left:7px;
+	_margin-left:3px;
+}
+#addForm{
+	margin:10px;
+	background:url(images/add_small.gif) no-repeat left 80%;
+	padding-left:20px;
+}
+.form-box{
+	z-index:9999;
+	position:absolute;
+	font-size:12px;
+	color:#000;
+	text-align:center;
+	left:0;
+	top:0;
+	width:296px;
+	visibility:hidden;
+}
+.form-box iframe{
+	height:102px;
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:-1;
+}
+.form-box form{
+	background:url(../images/msg_bg2.gif) no-repeat;
+	padding:0 0 40px;
+}
+.form-box .box-title{
+	font-family:arial;
+	font-weight:bold;
+	text-align:left;
+	margin:0;	
+	padding:4px 5px 28px 25px;
+}
+.form-box img{
+	cursor:pointer;
+	float:right;
+}
+</style>
+<script type="text/javascript">
+
+/* 第一个参数为要显示的表单，第二个为要隐藏的表单，第三个参数为user_id， 第四个为组id */
+function showForm(f, h, id){
+	Utility.hidden(h+'-box');
+	Utility.center(f+'-box',-110);
+	Utility.visible(f+'-box');
+	$(f+'-form').user_id.value = id;
+	if(arguments.length>3)
+		$(f+'-form').role_id.value = arguments[3];
+}
+function closeForm(f){
+	Utility.hidden(f+'-box');
+}
+function ckform(f){
+	if(f.elements["password"].value == "" || f.elements["password"].value == "请输入新密码")
+	{
+		f.elements["password"].value = "请输入新密码";
+		f.elements["password"].select();
+		return false;
+	}
+	var p = "user_id="+f.elements['user_id'].value+"&password="+f.elements['password'].value;
+	Utility.hidden('form-box');
+	Model.Post('admin','setPwd', p, ['密码设置成功','密码设置失败']);
+	return false;
+}
+
+</script>
+<div class="body">
+	<div class="form-box" id="setpwd-box">
+		<iframe frameborder="no" scrolling="no" width="100%"></iframe>
+		<form id="setpwd-form" method="post" action="admin.php" onsubmit="return ckform(this)">
+			<div class="box-title">
+			<img src="images/close.gif" onclick="closeForm('setpwd')"/>
+			Xlite －设置密码</div>
+			<input type="text" size="20" class="textbox" name="password"/>
+			<input type="image" src="images/submit.gif" align="absmiddle"/>
+			<input type="hidden" name="user_id"/>
+		</form>
+	</div>
+	<div class="form-box" id="chrole-box">
+		<iframe frameborder="no" scrolling="no" width="100%"></iframe>
+		<form id="chrole-form" method="post" action="admin.php">
+			<div class="box-title">
+			<img src="images/close.gif" onclick="closeForm('chrole')"/>
+			Xlite －设置用户组</div>
+			<select name="role_id">
+			<!-- BEGIN roleList -->
+				<option value='{role_id}'>{role_name}</option>
+			<!-- END roleList -->
+			</select>
+			<input type="image" src="images/submit.gif" align="absmiddle"/>
+			<input type="hidden" name="user_id"/>
+			<input type="hidden" name="C" value="admin"/>
+			<input type="hidden" name="A" value="chrole"/>
+		</form>
+	</div>
+	<h1>账号管理</h1>
+	<form action="admin.php" method="post" id="addForm" validate="true">
+		用户名 <input type="text" name="user_name" size="15" rule="required" tip="请输入用户名" class="highlight"/>
+		密码 <input type="password" name="password" size="15" rule="required" tip="请输入密码" class="highlight"/>
+		用户组 <select name="role_id">
+		<!-- BEGIN roleList -->
+			<option value='{role_id}'>{role_name}</option>
+		<!-- END roleList -->
+		</select>
+		<input type="submit" value="添 加" class="small-button"/>
+		<input type="hidden" name="C" value="admin"/>
+		<input type="hidden" name="A" value="save"/>
+	</form>
+	<div class="border-tip">
+		<img src="images/tip.gif" align="absmiddle"/> 单击进行选择，双击设置密码，按delete键可删除选中的项目。
+		<br/>　 删除用户时应至少保留一个用户存在，否则将不能登录系统. 
+	</div>
+	<div id="toolbar-top">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall"/>
+		<label for="ckall">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('admin')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+	</div>
+	<table class="list" cellspacing="0">
+	<tr>
+		<th width="5%">&nbsp;</th>
+		<th width="35%">用户名</th>
+		<th width="30%">用户组</th>
+		<th width="30%">操 作</th>
+	</tr>
+	<!-- BEGIN adminList -->
+	<tr onclick="TRSelect.selectChild(this)" onmouseover="this.className='tr-over'" onmouseout="if(!this.selected)this.className=''" title="单击选择该条记录" ondblclick="showForm('setpwd', 'chrole', {user_id});Event.stop(event)">
+		<td><input type="checkbox" name="id[]" value="{user_id}"/></td>
+		<td>{user_name}</td>
+		<td>{role_name}</td>
+		<td>
+		<a href="javascript:void(null)" onclick="showForm('setpwd', 'chrole', {user_id});Event.stop(event)"><img src="images/key.gif" align="absmiddle"/>	设置密码</a>
+		<a href="javascript:void(null)" onclick="showForm('chrole', 'setpwd', {user_id}, {role_id});Event.stop(event)"><img src="images/user.gif" align="absmiddle"/> 修改用户组</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:void(null)" onclick="if(confirm('确实要删除吗？'))jump('admin','delete','id={user_id}');Event.stop(event)"><img src="images/delete.gif" align="absmiddle" title="删除"/> 删除</a>
+		</td>
+	</tr>
+	<!-- END adminList -->
+	<tr class="none">
+		<td colspan="2" id="no-record">没有任何记录.</td>
+	</tr>
+	</table>
+	<div id="toolbar">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall2"/>
+		<label for="ckall2">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('admin')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+	</div>
+	<script type="text/javascript">
+	function ondelete(e){
+		e = window.event || e;
+		t = e.srcElement || e.target;
+		if(t.tagName == "INPUT" && (t.type == "text" || t.type == 'password')) return ;
+		if(e.keyCode == 46)
+			Model.Delete('admin');
+	}
+	Event.observe(document,'keyup', ondelete);
+	</script>
+</div>
+</body>
+</html>

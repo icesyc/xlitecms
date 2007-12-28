@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Xlite 1.0</title>
+<meta http-equiv="content-type" content="text/html;charset=gb2312"/>
+<meta name="Generator" content="EditPlus"/>
+<meta name="Author" content="ice_berg16(寻梦的稻草人)"/>
+<link rel="stylesheet" href="/tpl/default/global.css" type="text/css"/>
+<style>
+#ckall,#ckall2{
+	margin-left:7px;
+	_margin-left:3px;
+}
+.select{
+	background:#ECF5FF;
+}
+ul#guestbook {
+	margin:0;
+}
+ul#guestbook li{
+	margin:2px 0;
+	padding:2px 20px 2px 5px;
+	border-bottom:1px dashed #DDD;
+}
+
+ul#guestbook .msg-head {
+	padding:4px 0;
+}
+ul#guestbook .msg-content {
+	width:85%;
+	line-height:150%;
+}
+ul#guestbook h5 {
+	font-weight:bold;
+	margin:0;
+}
+ul#guestbook span.postTime {
+	padding-left:20px;
+	font-size:10px;
+	color:#69C;
+	font-family:arial,sans-serif;
+}
+ul#guestbook .author{
+	font-size:12px;
+	color:#000;
+	text-decoration:none;
+}
+ul#guestbook a.home {
+	margin-left:10px;
+	font-size:10px;
+	color:red;
+	font-family:arial,sans-serif;
+	text-decoration:none;
+}
+ul#guestbook li code {
+	margin-left:10px;
+	font-size:10px;
+	color:gray;
+	font-family:arial,sans-serif;
+}
+ul#guestbook div {
+	word-wrap:break-word;
+	font-family:verdana,sans-serif;
+}
+ul#guestbook div.reply {
+	margin-top:10px;
+	color:#E67C00;
+}
+div.msg-op{
+	float:right;
+	margin-top:-18px;
+}
+ul#guestbook li#no-record{
+	border:0;
+	padding:20px 0;
+}
+form{
+	padding-top:10px;
+	background:#f6f6f6;
+	border:1px solid #ccc;
+}
+form span{
+	float:left;
+	width:15%;
+	margin-right:10px;
+}
+form div{
+	clear:both;
+	margin-left:10px;
+	padding:4px;
+}
+</style>
+</head>
+<body>
+<div id="head">
+	<a href="/"><img id="logo" src="/images/xlite.gif"/></a>
+</div>
+<div class="body">
+	<h1>留言板</h1>
+	<ul id="guestbook">
+		<!-- xliteTag name="guestbook" number="10" -->
+		<li>
+			<div class="msg-head">
+				<a href="mailto:{email}" class="author">{author}</a>
+				<span class="author">{author}</span>
+				<span class="postTime">{postTime}
+				<a href="{home}" class="home">Home</a>
+				</span>
+			</div>
+			<div class="msg-content">{content}</div>
+			<div class="reply">{reply}</div>
+		</li>
+		<!-- /xliteTag -->
+	</ul>
+	<!-- 分页导航条 -->
+	<!-- xliteTag name="pager" -->
+	<div id="pager">{pager}</div>
+	<!-- /xliteTag -->
+	<h1 style="margin:10px 0">我要留言</h1>
+	<form method="post" action="guestbook.php" validate="true" id="msg-form">			
+		<div>
+			<span>姓名</span>
+			<input type="text" name="author" class="textbox" size="20" rule="required" tip="请填写您的姓名"/>
+		</div>
+		<div>
+			<span>E-mail</span>
+			<input type="text" name="email" class="textbox" size="20"/>
+		</div>
+		<div>
+			<span>个人主页</span>
+			<input type="text" name="homePage" class="textbox" size="30" value="http://"/>
+		</div>
+		<div>
+			<span>留言内容</span>
+			<textarea name="content" cols="40" rows="5" rule="required" tip="请填写留言内容" class="textbox"></textarea>
+		</div>
+		<div>
+			<span>验证码</span>
+			<input name="securitycode" class="textbox" size="8" rule="required" tip="请输入验证码"/>
+			<img src="guestbook.php?A=imgCode" align="absmiddle"/>
+		</div>
+		<div>
+			<span>&nbsp;</span>
+			<input type="submit" value="提 交" class="small-button"/>&nbsp;&nbsp;
+			<input type="reset"  class="small-button"/>
+			<input type="hidden" name="A" value="save"/>
+		</div>
+	</form>
+</div>
+<!-- 尾部 -->
+<div id="foot">
+	<p id="copyright">Powered By <a href="http://www.xlite.cn">Xlite 1.0</a></p>
+</div>
+</body>
+</html>

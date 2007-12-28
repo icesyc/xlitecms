@@ -1,0 +1,345 @@
+
+/*====================================================
+//		FileName:global.css
+//		Summary: 系统全局样式表文件
+//		Author: ice_berg16(寻梦的稻草人)
+//		LastModifed:2006-9-15
+//		copyright (c)2004-2006 ice_berg16@163.com
+//===================================================*/
+
+/*  全局部分  */
+a{
+	font-size:12px;
+	font-family:verdana, sans-serif;
+	color:#000;
+	text-decoration:none;
+}
+a:hover{
+	font-size:12px;
+	font-family:verdana, sans-serif;
+	text-decoration:none;
+}
+form{
+	margin:0px;
+	padding:0px;
+}
+ul{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+img{
+	border:0px;
+}
+body {
+	margin:0px;
+	padding:0px;
+	font-family:verdana, sans-serif;
+	font-size:12px;
+}
+textarea{
+	font-size:12px;
+}
+
+#head{
+	margin:0 10%;
+}
+.body{
+	border:1px solid #ccc;
+	margin:10px 10%;
+	padding:20px;
+}
+#foot{
+	margin:10px 10%;
+	border:1px solid #ccc;
+	text-align:right;
+	padding:5px;
+	font-weight:bold;
+	font-size:12px;
+}
+ul#menu{
+	margin:-27px 10% 0 10%;
+	height:31px;
+	font-size:14px;
+	background:url(../images/gray_dot.gif) repeat-x left bottom;
+}
+ul#menu li{
+	float:right;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	height:20px;
+	padding:10px 6px 0;
+	margin:0 3px;
+	background:url(../images/gray_dot.gif) repeat-x left top;
+	cursor:pointer;
+}
+ul#menu li.over{
+	background:url(../images/item_bg.gif) repeat-x left top;
+}
+ul#menu li.active{
+	border-bottom:1px solid #fff;
+	background:url(../images/item_bg.gif) repeat-x left top;
+	padding:10px 30px 0;
+}
+.submenu{
+	margin:0 10%;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-bottom:4px solid #6BBAEF;
+}
+.sub-menu{
+	text-align:right;
+	padding:10px;
+	display:none;
+}
+.sub-menu-show{
+	text-align:right;
+	padding:10px;
+	display:block;
+}
+.sub-menu-show a{
+	font-size:14px;
+	padding:6px;
+	border:1px solid #fff;
+	border-left:4px solid #fff;
+}
+.sub-menu-show a:hover,.sub-menu-show a.active{
+	font-size:14px;
+	border:1px solid #ccc;
+	border-left:4px solid #6BBAEF;
+}
+
+a.logout:link,a.logout:visited,a.logout:hover{
+	font-size:12px;
+	padding:0;
+	color:#2951A5;
+	background:#fff;
+	border:none;
+}
+
+/* 表单元素样式 */
+input.textbox{
+	border:1px solid #ccc;	
+	padding:1px;
+}
+input.highlight{
+	border:1px solid #ABBA9D;
+	background:#ffd;
+	padding:3px;
+}
+.highlight{
+	background:#ffd;
+}
+textarea{
+	border:1px solid #ccc;
+}
+select.fixed-width{
+	width:350px;
+}
+.button{
+	background:url(../images/item_bg.gif) repeat-x left top;
+	border:1px solid #ccc;	
+	border-top:none;
+	padding:10px 16px 2px;
+	_padding:10px 10px 2px;
+}
+.small-button{
+	background:url(../images/small_btn_bg.gif) no-repeat;
+	border:none;
+	padding:3px 0 0;
+	width:60px;
+	height:22px;
+}
+form span { 
+  float:left; 
+  width:10%;
+  text-align:right; 
+  padding:4px;
+  margin-right:10px;
+}
+form .comment{
+	margin:6px 12.5%;
+	_margin:6px 9.5%;
+	padding:4px 8px;
+	line-height:150%;
+	border:1px solid #ABBA9D;
+	background:#E7F5FF;
+}
+form div { 
+  clear:left; 
+  margin:5px;
+}
+form div.with-line{
+	padding-bottom:10px;
+	border-bottom:2px solid #6BBAEF;
+}
+/*页面标题*/
+h1{
+	font-size:14px;
+	margin:0;
+	padding:6px 0;
+	border-bottom:2px solid #6BBAEF;
+}
+#mainBox{
+	line-height:150%;
+}
+#tip-box, #progress-box{
+	z-index:9999;
+	position:absolute;
+	font-size:12px;
+	color:#000;
+	text-align:center;
+	left:0;
+	top:0;
+	width:296px;
+	height:107px;
+	visibility:hidden;
+}
+#tip-box iframe, #progress-box iframe{
+	height:102px;
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:-1;
+}
+#tip-box #container{
+	background:url(../images/msg_bg.gif) no-repeat;
+	padding:50px 0 44px;
+}
+#progress-box #bar{
+	background:url(../images/msg_bg.gif) no-repeat;
+	padding:40px 0 44px;
+}
+/* 更新文章时的进度条 */
+/*
+#progress-box{
+	visibility:visible;
+}
+*/
+#progress-bar{
+	border:1px solid #999;
+	padding:1px;
+	margin:0 40px 0;
+	font-size:10px;
+	text-align:left;
+}
+#progress-bar p{
+	position:absolute;
+	margin:0;
+	padding:0;
+	width:71%;
+	_width:100%;
+	text-align:center;
+}
+#progress-bar div{
+	background:url(../images/progress_bg.gif) repeat-x;
+	height:12px;
+}
+
+span.tip{
+	float:none;
+	margin-left:10px;
+	color:#F60;
+	display:none;
+}
+
+/* 列表样式 */
+ul.list{
+	margin:10px 0;
+}
+ul.list li{
+	border-bottom:1px dashed #ddd;
+	padding:3px;
+}
+table.list{
+	width:100%;	
+	border-collapse:collapse;
+	border-bottom:2px solid #6BBAEF;
+	cursor:default;
+}
+table tr.tr-over, tr.tr-select{
+	background:#ECF5FF;
+}
+table.list th{
+	text-align:left;
+	border-bottom:2px solid #6BBAEF;
+}
+table.list td{
+	border-bottom:1px dashed #ddd;
+	padding:3px;
+	margin:0;
+}
+/* 未审核的文章 */
+table.list tr.bg0{
+	background:#ffd;
+}
+#pager{
+	padding:10px;
+	text-align:right;
+}
+#pager a{
+	padding:2px 6px;
+	border:1px solid #C6E7FF;
+}
+#pager a:hover{
+	background:#DEEFFF;
+}
+#pager a.current{
+	background:#DEEFFF;
+}
+#toolbar-top{
+	margin-bottom:12px;
+}
+/* 功能按钮的样式 */
+#toolbar{
+	padding:10px 0 0;
+}
+a.link-button{
+	padding:6px 11px;
+}
+a.link-button:hover{
+	background:url(../images/button_over_bg.gif) no-repeat left top;
+}
+a.link-button:focus,a.link-button-wide:focus{
+	-moz-outline-style:none;
+}
+a.link-button-wide{
+	padding:6px 11px 6px 9px;
+}
+a.link-button-wide:hover{
+	background:url(../images/button_over_bg_wide.gif) no-repeat;
+}
+/* 顶端提示信息的样式 */
+div.border-tip{
+	padding:10px;
+	border:1px solid #ABBA9D;
+	background:#ffd;
+	margin:10px 0;
+}
+/* 没有记录时显示信息的样式 */
+#no-record{
+	background:#FFFFE1;
+	padding:20px;
+	text-align:center;
+}
+
+/* 常用样式 */
+.clear{
+	clear:both;
+	height:1px;
+	overflow:hidden;
+
+}
+.red{
+	color:red;
+}
+.orange{
+	color:#F60;
+}
+.center{
+	text-align:center;
+}
+.none{
+	display:none;
+}

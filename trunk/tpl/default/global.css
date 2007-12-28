@@ -1,0 +1,169 @@
+/*====================================================
+//		FileName:global.css
+//		Summary: 系统全局样式表文件
+//		Author: ice_berg16(寻梦的稻草人)
+//		LastModifed:2006-9-15
+//		copyright (c)2004-2006 ice_berg16@163.com
+//===================================================*/
+
+/*  全局部分  */
+a{
+	font-size:12px;
+	font-family:verdana, sans-serif;
+	color:#000;
+	text-decoration:none;
+}
+a:hover{
+	font-size:12px;
+	font-family:verdana, sans-serif;
+	text-decoration:none;
+}
+form{
+	margin:0px;
+	padding:0px;
+}
+ul{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+img{
+	border:0px;
+}
+body {
+	margin:0px;
+	padding:0px;
+	font-family:verdana, sans-serif;
+	font-size:12px;
+	text-align:center;
+}
+body > *{
+	margin-left:auto;
+	margin-right:auto;
+}
+textarea{
+	font-size:12px;
+}
+
+#head, .body{
+	width:770px;
+	text-align:left;
+	clear:both;
+}
+#foot{
+	clear:both;
+	margin-top:20px;
+}
+#copyright{	
+	border-top:2px solid #599AF1;
+	background:#F6F6F6;
+	margin:0;
+	padding:8px;
+	text-align:center;
+	font-size:10px;
+}
+#copyright a{
+	color:#F60;
+	font-weight:bold;
+	font-size:10px;
+}
+/* 菜单 */
+ul#menu{
+	border-top:1px solid #ccc;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-bottom:4px solid #6BBAEF;
+	height:30px;
+	margin-bottom:10px;
+}
+ul#menu li{
+	float:left;
+}
+ul#menu li a{
+	display:block;
+	font-size:14px;
+	margin:0 10px;
+	padding:8px;
+}
+ul#menu li a:hover{
+	text-decoration:underline;
+}
+
+/* 表单元素样式 */
+input.textbox{
+	border:1px solid #ccc;	
+	padding:1px;
+}
+textarea{
+	border:1px solid #ccc;
+}
+/* 分页导航的样式 */
+#pager{
+	padding:5px 0;
+	text-align:right;
+	font-size:10px;
+}
+#pager a{
+	padding:2px 6px;
+	border:1px solid #C6E7FF;
+}
+#pager a:hover{
+	background:#DEEFFF;
+}
+#pager a.current{
+	background:#DEEFFF;
+}
+
+/* 没有记录时显示信息的样式 */
+#no-record{
+	background:#FFFFE1;
+	padding:20px;
+	text-align:center;
+}
+
+/* 常用样式 */
+.clear{
+	clear:both;
+	font-size:1px;
+}
+.red{
+	color:red;
+}
+.orange{
+	color:#F60;
+}
+.center{
+	text-align:center;
+}
+.none{
+	display:none;
+}
+
+/*页面标题*/
+h1{
+	margin:0;
+	font-size:14px;
+	color:#000;
+	height:24px;
+	line-height:24px;
+	background:url(images/block_title_bg.gif) repeat-x left top;
+	text-align:left;
+	padding:0 6px;
+}
+
+/* 列表样式 */
+ul.list{
+	margin:6px 0;
+}
+ul.list li{
+	border-bottom:1px dashed #ddd;
+	padding:3px;
+}
+
+.small-button{
+	background:url(images/small_btn_bg.gif) no-repeat;
+	border:none;
+	padding:3px 0 0;
+	width:60px;
+	height:22px;
+}

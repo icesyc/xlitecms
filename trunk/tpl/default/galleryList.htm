@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Xlite 1.0</title>
+<meta http-equiv="content-type" content="text/html;charset=gb2312"/>
+<meta name="Generator" content="EditPlus"/>
+<meta name="Author" content="ice_berg16(寻梦的稻草人)"/>
+<link rel="stylesheet" href="/tpl/default/global.css" type="text/css"/>
+<style>
+#top-bar{
+	padding:4px 10px;
+	border:1px solid #ABBA9D;
+	background:#ffd;
+	margin:10px 0;
+}
+h1#top-nav{
+	font-size:12px;
+}
+#galleryList{
+	clear:both;
+	width:100%;
+	border-top:1px solid #d9d9d9;
+	background:#f7f7f7;
+}
+.gallery{
+	float:left;
+	width:145px;
+	height:145px;
+	padding:8px;
+	text-align:center;
+	border:1px solid #f7f7f7;
+	margin:4px 6px;
+}
+.gallery img{
+	border:1px solid #D5DADE;
+	padding:6px;
+	background:#fff;
+}
+.gallery p{
+	text-align:center;
+	margin: 4px;
+	overflow:hidden;
+	white-space:nowrap;
+	width:100%;
+}
+.gallery p a{
+	color:#69c;
+}
+</style>
+</head>
+<body>
+
+<!-- 头部 -->
+<div id="head">
+	<a href="/"><img id="logo" src="/images/xlite.gif"/></a>
+</div>
+
+<!-- 栏目导航条 -->
+<div class="body">
+<ul id="menu">	
+	<li><a href="/">首页</a></li>
+	<!-- xliteTag name="sort" select="1,14,19,25" -->
+	<li>
+		<a href="/html/{id}/list_1.htm">{title}</a>
+	</li>
+	<!-- /xliteTag -->
+</ul>
+</div>
+
+<div class="body">
+	<!-- 位置导航条 -->
+	<h1 id="top-nav">
+		<a href="../../">首页</a>
+		<!-- xliteTag name="positionNavigator" -->
+		<img src="/tpl/default/images/to.gif"/>
+		<a href="../{id}/gallery_list_1.htm">{title}</a>
+		<!-- /xliteTag -->
+		<img src="/tpl/default/images/to.gif"/>
+		<!-- xliteTag name="sort" select="current" -->
+		<span>{title}</span>
+		<!-- /xliteTag -->
+	</h1>
+
+	<!-- 图片 -->
+	<div id="galleryList">
+		<!-- xliteTag name="gallery" sort="current" number="16" -->
+		<div class="gallery">
+			<p><a href="{link}"><img src="{thumbnail}"/></a></p>
+			<p class="center"><a href="{link}">{title}</a></p>
+		</div>
+		<!-- /xliteTag -->
+		<div class="clear"></div>
+	</div>
+
+	<!-- 分页导航条 -->
+	<!-- xliteTag name="pager" -->
+	<div id="pager">{pager}</div>
+	<!-- /xliteTag -->
+</div>
+<!-- 尾部 -->
+<div id="foot">
+	<p id="copyright">Powered By <a href="http://www.xlite.cn">Xlite 1.0</a></p>
+</div>
+</body>
+</html>

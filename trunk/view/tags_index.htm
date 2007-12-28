@@ -1,0 +1,60 @@
+{head}
+<style>
+#ckall,#ckall2{
+	margin-left:7px;
+	_margin-left:3px;
+}
+.link-img{
+	height:40px;
+}
+</style>
+
+<div class="body">
+	<h1>标签管理</h1>
+	<div class="border-tip">
+		<img src="images/tip.gif" align="absmiddle"/> 单击进行选择，按delete键可删除选中的项目，桔红色数字代表被文章引用的次数。
+	</div>
+	<div id="toolbar-top">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall"/>
+		<label for="ckall">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('tags')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+	</div>
+	<table class="list" cellspacing="0">
+	<tr>
+		<th width="3%">&nbsp;</th>
+		<th width="15%">关键词</th>
+		<th width="15%">操作</th>
+	</tr>
+	<!-- BEGIN tagList -->
+	<tr onclick="TRSelect.selectChild(this)" onmouseover="this.className='tr-over'" onmouseout="if(!this.selected)this.className=''" title="单击选择该条记录">
+		<td><input type="checkbox" name="id[]" value="{enc_keyword}"/>
+		<td>{keyword}[<span class='orange'>{num}</span>]</td>
+		<td>
+		<a href="admin.php?C=tags&A=delete&id={enc_keyword}" onclick="return confirm('确实要删除吗？')" title="删除"><img src="images/delete.gif" align="absmiddle" title="删除"/> 删除</a>
+		</td>
+	</tr>
+	<!-- END tagList -->
+	</table>
+	<div id="pager">
+		{pager}
+	</div>
+	<div id="toolbar">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall2"/>
+		<label for="ckall2">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('tags')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+	</div>
+</div>
+<script type="text/javascript">
+function ondelete(e){
+	e = window.event || e;
+	t = e.srcElement || e.target;
+	if(t.tagName == "INPUT" && t.type == "text") return;
+	if(e.keyCode == 46)
+		Model.Delete('role');
+}
+Event.observe(document,'keyup', ondelete);
+</script>
+</body>
+</html>

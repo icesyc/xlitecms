@@ -1,0 +1,164 @@
+{head}
+<style>
+form span{
+	width:15%;
+}
+form .comment{
+	margin:6px 17.4%;
+	_margin:6px 13.3%;
+}
+</style>
+<form class="body" action="admin.php" method="post" validate="true">
+	<h1>采集规则{act}</h1>
+	<div class="border-tip">
+		<img src="images/tip.gif" align="absmiddle"/> 可使用的规则变量</br>
+		__ANY__：可代替任意长度的字符串<br/>
+		__CATCH__：代替要捕获的内容<br/>
+		__SPACE__：代替所有空白字符如空格，换行等。<br/>
+		__DIGITAL<1,5>__：代替指定长度范围的数字，范围长度如果省略，则为任意长度<br/>
+		__ALNUM<1,5>__：代替指定长度范围的所有数字和字母，范围长度如果省略，则为任意长度
+	</div>
+	<div>
+		<span>规则名称</span> 
+		<input type="text" class="highlight" name="name" size="20" value="{name}" rule="required" tip="规则名称必须指定"/>		
+	</div>
+	<div>
+		<span>采集列表的URL</span> 
+		<input type="text" class="highlight" name="list_url" size="60" value="{list_url}" rule="required" tip="采集列表的URL必须指定" scroll="yes"/>
+		<input type="checkbox" value="1" id="rssbox" onclick="checkRSS(this.checked)"/>
+		<label for="rssbox">RSS地址</label>
+		<input type="hidden" name="is_rss"/>
+		<p class="comment">
+		分页的标记可以采用[1-20]这种方式来代替
+		<br/>其中1-20表示分页的页码，系统会按照list.php?page=1,list.php?page=2...这种方式来采集
+		<br/>如: http://www.test.com/list.php?page=[1-20]
+		</p>
+	</div>
+	<div>
+		<span>列表过滤起始串</span>
+		<textarea  cols="70" rows="4" name="list_before_string" size="60">{list_before_string}</textarea>
+	</div>
+	<div>
+		<span>列表过滤结束串</span>
+		<textarea  cols="70" rows="4" name="list_after_string" size="60">{list_after_string}</textarea>
+		<p class="comment">
+		使用上述二项可以缩小列表抓取的范围，可以更精确的获得的文章链接。
+		</p>
+	</div>
+	<div class="with-line" id="urlDiv">
+		<span>文章链接的URL</span> 
+		<input type="text" class="highlight" name="article_url" size="60" value="{article_url}" rule="required" tip="文章链接的URL必须指定" scroll="yes"/>
+		<p class="comment">
+		文章id的标记可以采用__DIGITAL__来代替
+		<br/>如: article/show.php?id=__DIGITAL__
+		</p>
+	</div>
+	<div>
+		<span>标题规则</span> 
+		<textarea cols="70" rows="4" name="title_pattern">{title_pattern}</textarea>		
+	</div>
+	<div>
+		<span>标签规则</span> 
+		<textarea cols="70" rows="4" name="tags_pattern">{tags_pattern}</textarea>	
+	</div> 
+	<div> 
+		<span>发布日期规则</span> 
+		<textarea cols="70" rows="4" name="post_time_pattern">{post_time_pattern}</textarea>	
+	</div>
+	<div class="with-line"> 
+		<span>文章摘要规则</span> 
+		<textarea class="textbox" name="summary_pattern" cols="70" rows="4">{summary_pattern}</textarea>
+	</div>
+	<div> 
+		<span>文章作者规则</span> 
+		<textarea cols="70" rows="4" name="author_pattern">{author_pattern}</textarea>	
+	</div> 
+	<div> 
+		<span>文章来源规则</span> 
+		<textarea cols="70" rows="4" name="come_from_pattern">{come_from_pattern}</textarea>	
+	</div>
+	<div class="with-line"> 
+		<span>文章内容规则</span> 
+		<textarea class="textbox" name="content_pattern" cols="70" rows="6">{content_pattern}</textarea>
+	</div>
+	<div>
+		<span>关键词过滤</span>
+		<input type="text" class="textbox" name="keyword" size="30" value="{keyword}" maxlength="30"/>
+		多个关键词用英文逗号","隔开
+	</div>
+	<div> 
+		<span>是否启用Cookie</span>
+		<input type="checkbox" id="enable_cookie" name="enable_cookie" value="1" onclick="setCookie(this.checked)"/>
+		<label for="enable_cookie">启用Cookie</label>
+	</div>
+	<div class="none" id="cookie">
+		<span></span>
+		<textarea rows="5" cols="70" class="textbox" name="cookie">{cookie}</textarea>
+	</div>
+	<div> 
+		<span>该规则获取记录数</span>
+		<input type="text" class="textbox" name="get_number" size="10" value="{get_number}" maxlength="10"/>
+	</div>
+	<div> 
+		<span>页面编码</span>
+		<select name="charset">
+			<option value="GBK">GBK</option>
+			<option value="UTF-8">UTF-8</option>
+		</select>
+	</div>
+	<div class="with-line">
+		<span>保存到分类</span> 
+		<select name="save_sort_id" class="highlight" rule="required" tip="请选择文章的分类">
+		<option value="">请选择文章分类</option>
+		<!-- BEGIN sortList -->
+		<option value="{id}">{title}</option>
+		<!-- END sortList -->
+		</select>
+		<input type="checkbox" name="save_resource" value="1" id="sr"/>
+		<label for="sr">下载文章中的资源(如FLASH,图片等)。</label>
+	</div>
+	<div class="center">
+		<input type="submit" value="保 存" class="button"/>　
+		<input type="button" value="返 回" class="button" onclick="history.back()"/>
+		<input type="hidden" name="C" value="scratcher"/>
+		<input type="hidden" name="A" value="save"/>
+		<input type="hidden" name="id" value="{id}"/>
+	</div>
+</form>
+<script type="text/javascript">
+document.forms[0].save_sort_id.value = '{save_sort_id}';
+document.forms[0].charset.value = '{charset}' == '' ? "GBK" : '{charset}';
+document.forms[0].save_resource.checked = {save_resource} == 1;
+$('rssbox').checked = {is_rss} == 1;
+checkRSS($('rssbox').checked);
+checkCookie();
+function checkRSS(bool){
+	if(bool)
+	{
+		document.forms[0].is_rss.value=1;
+		document.forms[0].article_url.removeAttribute("rule");
+		Utility.hide('urlDiv');
+	}
+	else
+	{
+		document.forms[0].is_rss.value=0;
+		document.forms[0].article_url.setAttribute("rule", "required");
+		Utility.show('urlDiv');
+		
+	}
+}
+
+function setCookie(bool){
+	bool ? Utility.showInline('cookie') : Utility.hide('cookie');
+	autoFixIframe(false);
+}
+function checkCookie(){
+	if(document.forms[0].cookie.value.length > 0)
+	{
+		$('enable_cookie').checked = true;
+		Utility.showInline('cookie');
+	}
+}
+</script>
+</body>
+</html>

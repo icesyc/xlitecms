@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Xlite 1.0</title>
+<meta http-equiv="content-type" content="text/html;charset=gb2312"/>
+<meta name="Generator" content="EditPlus" />
+<meta name="Author" content="ice_berg16(寻梦的稻草人)" />
+<link rel="stylesheet" href="../css/global.css" type="text/css" />
+<script type="text/javascript" src="../javascript/commonLib.js"></script>
+<style>
+#install{
+	margin:5% 15% 0;
+	border:1px solid #ccc;
+	font-size:12px;
+	padding:10px;
+	background:url(../images/xlite.gif) no-repeat right 98%;
+}
+.fixwidth{
+	width:200px;
+}
+select.fixwidth{
+	width:206px;
+}
+#foot{
+	margin:10px 15%;
+}
+form .comment{
+	margin-left:3%;
+}
+form span{
+	width:25%;
+}
+form div{
+	padding:0;
+}
+</style>
+<script type="text/javascript">
+function ckform(f){
+	if(!Validator.validate(f))
+		return false;
+	f.submit();
+	f.inst.disabled = true;
+	f.inst.value = '正在安装，请稍候...';
+}
+</script>
+</head>
+<body>
+<form id="install" method="post" action="index.php" onsubmit="return ckform(this)">
+	<h1>Xlite-安装程序</h1>
+	<div class="with-line">
+		<span>文件及目录权限检查结果</span>
+		<select class="fixwidth">{filemode}</select>
+		<p class="comment">如果上述列表中发现失败信息，请先到FTP中更改对应目录的权限为可写</p>
+	</div>
+	<div>
+		<span>数据库主机</span>
+		<input type="text" name="dbhost" class="textbox fixwidth" rule="required" tip="请输入数据库主机" value="localhost"/>
+	</div>
+	<div>
+		<span>数据库用户名</span>
+		<input type="text" name="dbuser" class="textbox fixwidth" rule="required" tip="请输入数据库用户名" value="root"/>
+	</div>
+	<div>
+		<span>数据库密码</span>
+		<input type="password" name="dbpwd" class="textbox fixwidth"/>
+	</div>
+	<div>
+		<span>数据库名称</span>
+		<input type="text" name="dbname" class="textbox fixwidth" rule="required" tip="请输入数据库名称" value="xlite"/>
+	</div>
+	<div>
+		<span>数据表前缀</span>
+		<input type="text" name="tablePrefix" class="textbox fixwidth" rule="required" value="xlite_"/>
+	</div>
+	<div class="with-line">
+		<span></span>
+		<input type="checkbox" name="createDB" value="1" id="createDB"/>
+		<label for="createDB">创建新的数据库</label>
+		<input type="checkbox" name="override" value="1" id="override" checked="checked"/>
+		<label for="override">数据表存在时覆盖</label>
+	</div>
+	<div>
+		<span>初始管理员账号</span>
+		<input type="text" name="adminUser" value="xlite_admin" class="textbox fixwidth" rule="required" tip="请输入管理员账号"/>
+	</div>
+	<div class="with-line">
+		<span>初始管理员密码</span>
+		<input type="text" name="adminPwd" value="xlite_admin" class="textbox fixwidth" rule="required" tip="请输入管理员密码"/>
+	</div>
+	<div style="padding:10px 0">
+		<span></span>
+		<input type="submit" class="button" value="开始安装" name="inst"/>
+		<input type="hidden" name="A" value="installDB"/>
+		<input type="hidden" name="driver" value="Mysql"/>
+		<input type="hidden" name="dbType" value="mysql"/>
+	</div>
+</form>
+<div id="foot">
+	Xlite - By ice_berg16[寻梦的稻草人] 
+</div>
+</body>
+</html>

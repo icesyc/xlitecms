@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Xlite 1.0</title>
+<meta http-equiv="content-type" content="text/html;charset=gb2312"/>
+<meta name="Generator" content="EditPlus"/>
+<meta name="Author" content="ice_berg16(寻梦的稻草人)"/>
+<link rel="stylesheet" href="/tpl/default/global.css" type="text/css"/>
+<style>
+/* 左侧 */
+#left{
+	border:1px solid #ccc;
+	width:22%;
+	float:left;
+	padding:10px;
+}
+/* 右侧 */
+#right{
+	border:1px solid #ccc;
+	width:72%;
+	float:right;
+	padding:10px;
+}
+#top-bar{
+	padding:4px 10px;
+	border:1px solid #ABBA9D;
+	background:#ffd;
+	margin:10px 0;
+}
+#summary{
+	padding:4px 10px;
+	border:1px solid #ABBA9D;
+	background:#ffd;
+	margin:10px 0;
+	line-height:150%;
+}
+#postTime{
+	float:right;
+	color:#666;
+	font-size:10px;
+	width:100px;
+}
+h1#top-nav{
+	font-size:12px;
+}
+#pic-news li{
+	margin:6px 0;
+	line-height:150%;
+}
+</style>
+</head>
+<body>
+
+<!-- 头部 -->
+<div id="head">
+	<a href="/"><img id="logo" src="/images/xlite.gif"/></a>
+</div>
+
+<!-- 栏目导航条 -->
+<div class="body">
+<ul id="menu">	
+	<li><a href="/">首页</a></li>
+	<!-- xliteTag name="sort" select="1,14,19,25" -->
+	<li>
+		<a href="/html/{id}/list_1.htm">{title}</a>
+	</li>
+	<!-- /xliteTag -->
+</ul>
+</div>
+
+<div class="body">
+<!-- 输出本类的子类 -->
+<div id="left">
+	<h1>栏目导航</h1>
+	<ul class="list">
+		<!-- xliteTag name="sortNavigator" select="current" -->
+		<li><img src="/tpl/default/images/to.gif"/>
+		<a href="../{id}/list_1.htm">{title}</a></li>
+		<!-- /xliteTag -->
+	</ul>
+	<h1>最新新闻</h1>
+	<ul class="list">
+		<!-- xliteTag name="article" number="6" length="20" -->
+		<li>
+			<a href="{link}">{title}</a><br/>
+		</li>
+		<!-- /xliteTag -->
+	</ul>
+</div>
+<div id="right">
+	<!-- 位置导航条 -->
+	<h1 id="top-nav">
+		<a href="../../">首页</a>
+		<!-- xliteTag name="positionNavigator" -->
+		<img src="/tpl/default/images/to.gif"/>
+		<a href="../{id}/list_1.htm">{title}</a>
+		<!-- /xliteTag -->
+		<img src="/tpl/default/images/to.gif"/>
+		<!-- xliteTag name="sort" select="current" -->
+		<a href="../{id}/list_1.htm">{title}</a>
+		<!-- /xliteTag -->
+		<img src="/tpl/default/images/to.gif"/>
+		<span>正文</span>
+	</h1>
+	<!-- 新闻内容 -->
+
+	<!-- xliteTag name="articleDetail" -->
+	<h3 id="title">{title}</h3>
+	<div id="author">	
+		作者：{author}
+		日期：{postTime}
+		标签：{tags}
+	</div>
+	<div id="summary">{summary}</div>
+	<div id="content">{content}</div>
+	<!-- /xliteTag -->
+</div>
+<!-- 尾部 -->
+<div id="foot">
+	<p id="copyright">Powered By <a href="http://www.xlite.cn">Xlite 1.0</a></p>
+</div>
+</body>
+</html>

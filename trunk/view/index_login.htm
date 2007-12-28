@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Xlite 1.0</title>
+<meta http-equiv="content-type" content="text/html;charset=gb2312"/>
+<meta name="Generator" content="EditPlus" />
+<meta name="Author" content="ice_berg16(寻梦的稻草人)" />
+<link rel="stylesheet" href="css/global.css" type="text/css" />
+<script type="text/javascript" src="javascript/commonLib.js"></script>
+<style>
+#login{
+	margin:15% 20% 10px;
+	border:1px solid #ccc;
+	font-size:14px;
+	padding:10px;
+	background:url(images/xlite.gif) no-repeat right 90%;
+}
+#login .fixwidth{
+	width:200px;
+}
+#foot{
+	margin:0 20%;
+}
+p{
+	padding:0 10px;
+	color:#F60;
+}
+form div{
+	padding:0;
+}
+</style>
+</head>
+<body onload="document.forms[0].user_name.focus()">
+<form id="login" method="post" action="admin.php" validate="true">
+	<h1>Xlite-管理员登录</h1>
+	<p>{msg}</p>
+	<div>
+		<span>用户名</span>
+		<input type="text" name="user_name" class="textbox fixwidth" rule="required" tip="请输入用户名"/>
+	</div>
+	<div>
+		<span>密　码</span>
+		<input type="password" name="password" class="textbox fixwidth" rule="required" tip="请输入密码"/>
+	</div>
+	<div>
+		<span></span>
+		<input type="submit" class="button" value="登录系统"/>
+		<input type="hidden" name="C" value="index"/>
+		<input type="hidden" name="A" value="login"/>
+	</div>
+</form>
+<div id="foot">
+	Xlite - By ice_berg16[寻梦的稻草人] 
+</div>
+</body>
+</html>

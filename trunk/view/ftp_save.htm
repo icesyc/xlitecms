@@ -1,0 +1,52 @@
+{head}
+<style>
+form span{
+	width:15%;
+}
+</style>
+<form action="admin.php" method="post" class="body" validate="true">
+	<h1>新增FTP账号</h1>
+	<div> 
+		<span>网站名称</span> 
+		<input type="text"  class="highlight" name="site_name" value="{site_name}" size="25" rule="required" tip="网站名称不能为空"/>
+	</div>
+	<div> 
+		<span>FTP主机地址</span> 
+		<input type="text"  class="highlight" name="host" value="{host}" size="25" rule="required" tip="主机名不能为空"/>
+		可以是IP地址或域名
+	</div> 
+	<div> 
+		<span>FTP用户名</span> 
+		<input type="text" class="highlight" name="user" value="{user}" size="25" rule="required" tip="FTP用户名不能为空"/>
+	</div>
+	<div> 
+		<span>FTP密码</span> 
+		<input type="password" class="highlight" name="pwd" value="{pwd}" size="25" rule="required" tip="FTP密码不能为空"/>
+	</div>
+	<div class="with-line">
+		<span>发布目录</span>
+		<input type="text" class="highlight" name="pub_dir" value="{pub_dir}" size="25" rule="required" tip="发布目录不能为空"/>
+		以"/"开头的目录地址，如/xlite/pubdir
+	</div>
+	<div>
+		<span>发布指定分类下的文章</span> 
+		<select name="sort_id">
+		<option value="0">所有分类</option>
+		<!-- BEGIN sortList -->
+		<option value="{id}">{title}</option>
+		<!-- END sortList -->
+		</select>
+	</div>
+	<div>
+		<span></span>
+		<input type="submit" class="button" value="确定"/>
+		　<input type="button" class="button" value="返回" onclick="history.back()"/>
+		<input type="hidden" name="C" value="ftp"/>
+		<input type="hidden" name="A" value="save"/>
+		<input type="hidden" name="id" value="{id}"/>
+	</div>
+</form>
+<script type="text/javascript">
+document.forms[0].sortId.value = '{sortId}';
+</script>
+</body>

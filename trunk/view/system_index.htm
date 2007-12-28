@@ -1,0 +1,57 @@
+{head}
+<style>
+table.list td.field{
+	text-align:right;
+	width:20%;
+	font-weight:bold;
+	padding:10px;
+	border-right:1px solid #ABBA9D;
+	background:#ffc;
+}
+table.list td{
+	padding:10px;
+}
+</style>
+<div class="body">
+	<h1>系统信息</h1>
+	<table class="list" cellspacing="0">
+		<tr>
+			<td class="field">服务器环境</td>
+			<td>{webServer}</td>
+		</tr>
+		<tr>
+			<td class="field">域名</td>
+			<td>{domain}</td>
+		</tr>
+		<tr>
+			<td class="field">PHP版本</td>
+			<td>{phpVer}</td>
+		</tr>
+		<tr>
+			<td class="field">MYSQL版本</td>
+			<td>{mysqlVer}</td>
+		</tr>
+		<tr>
+			<td class="field">文件上传</td>
+			<td>{upload}</td>
+		</tr>
+		<tr>
+			<td class="field">安全模式</td>
+			<td>{safeMode}</td>
+		</tr>
+		<tr>
+			<td class="field">GD库扩展</td>
+			<td>{gdInfo}</td>
+		</tr>
+		<tr>
+			<td class="field">PDO扩展</td>
+			<td><img src="images/{pdo}.gif" align="absmiddle"/></td>
+		<tr>
+		<tr>
+			<td class="field">mbstring扩展</td>
+			<td><img src="images/{mbstring}.gif" align="absmiddle"/></td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>

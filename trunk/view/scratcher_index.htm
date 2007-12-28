@@ -1,0 +1,110 @@
+{head}
+<style>
+#ckall,#ckall2{
+	margin-left:7px;
+	_margin-left:3px;
+}
+#searchForm{
+	margin:10px;
+}
+#searchButton{
+	background:url(images/button_over_bg.gif);
+	border:none;
+	padding:4px 11px 5px 10px;
+	_padding:4px 6px 4px 5px;
+}
+table{
+	line-height:150%;
+}
+.seprator{
+	border-top:1px dashed #ccc;
+	height:1px;
+	overflow:hidden;
+	margin:3px;
+}
+#importRule{
+	padding:8px 10px;
+	border:1px solid #ABBA9D;
+	background:#ffd;
+	margin:10px 0;
+	display:none;
+}
+</style>
+<div class="body">
+	<h1>采集规则管理</h1>
+	<div class="border-tip">
+		<img src="images/tip.gif" align="absmiddle"/> 单击进行选择，双击编辑项目，按delete键可删除选中的项目。
+	</div>
+	<div id="toolbar-top">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall"/>
+		<label for="ckall">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('scratcher')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:loc('scratcher','save')" class="link-button" hidefocus="true"><img src="images/add_small.gif" align="absmiddle"/> 添加</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:Scratcher.Export()" class="link-button" hidefocus="true" title="导出选择的规则"><img src="images/export.gif" align=""/> 导出</a>
+		<a href="javascript:Utility.toggle('importRule')" class="link-button" hidefocus="true" title="导入选择的规则"><img src="images/import.gif"/> 导入</a>
+	</div>
+	<form id="importRule" method="post" action="admin.php" enctype="multipart/form-data" validate="true">
+		上传导出的规则文件：
+		<input type="file" name="rules" rule="required" tip="请上传规则文件"/>
+		<input type="submit" class="small-button" value="导 入"/>
+		<input type="hidden" name="C" value="scratcher"/>
+		<input type="hidden" name="A" value="import"/>
+	</form>
+	<table class="list" cellspacing="0">
+	<tr>
+		<th>&nbsp;</th>
+		<th width="25%">名 称</th>
+		<th width="15%">保存类别</th>
+		<th width="15%">上次采集日期</th>
+		<th width="15%">已采集</th>
+		<th width="30%">操 作</th>
+	</tr>
+	<!-- BEGIN ruleList -->
+	<tr onclick="TRSelect.toggle(this)" onmouseover="this.className='tr-over'" onmouseout="if(!this.selected)this.className=''" title="单击选择该条记录" ondblclick="loc('scratcher','save','id={id}')">
+		<td><input type="checkbox" name="id[]" value="{id}"/></td>
+		<td>{name} {is_rss}</td>
+		<td>{sort}</a></td>
+		<td>{last_modified_time}</td>
+		<td>{total_save}</td>
+		<td>
+			<a href="admin.php?C=scratcher&A=save&id={id}"><img src="images/edit.gif" align="absmiddle"/> 修改</a>
+			<a href="admin.php?C=scratcher&A=delete&id={id}" onclick="stopEvent(event);return confirm('确实要删除吗？')"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+			<a href="admin.php?C=scratcher&A=test&id={id}"><img src="images/test.gif" align="absmiddle"/> 测试</a>
+			<a href="javascript:Scratcher.ScratchList({id})" onclick="stopEvent(event)"><img src="images/down.gif" align="absmiddle"/> 采集</a>
+			<div class="seprator"></div>
+			<a href="admin.php?C=scratcher&A=save&clone=1&id={id}"><img src="images/clone.gif" align="absmiddle"/> 复制规则</a>
+			<a href="javascript:Scratcher.ClearCache({id})" onclick="stopEvent(event)"><img src="images/clean.gif" align="absmiddle"/> 清理缓存</a>
+		</td>
+	</tr>
+	<!-- END ruleList -->
+	<tr class="{noRecord}">
+		<td colspan="6" id="no-record">还没有定义采集规则.</td>
+	</tr>
+	</table>
+	<div id="pager">
+		{pager}
+	</div>
+	<div id="toolbar">
+		<input type="checkbox" onclick="TRSelect.selectAll(this.checked)" id="ckall2"/>
+		<label for="ckall2">全选</label> 
+		选中项：
+		<a href="javascript:Model.Delete('scratcher')" class="link-button" hidefocus="true"><img src="images/delete.gif" align="absmiddle"/> 删除</a>
+		<img src="images/spacer.gif" align="absmiddle"/>
+		<a href="javascript:loc('scratcher','save')" class="link-button" hidefocus="true"><img src="images/add_small.gif" align="absmiddle"/> 添加</a>
+	</div>
+</div>
+<script type="text/javascript">
+function ondelete(e){
+	e = window.event || e;
+	t = e.srcElement || e.target;
+	if(t.tagName == "INPUT" && t.type == "text") return;
+	if(e.keyCode == 46)
+		Model.Delete('scratcher');
+}
+Event.observe(document,'keyup', ondelete);
+</script>
+</body>
+</html>
